@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    appDir: true,
+    // Deprecated Configuration.
+    // appDir: true,
   },
 }
 
