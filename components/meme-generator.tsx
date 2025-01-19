@@ -5,7 +5,7 @@ import ICON_LIST from '@/config/iconifly-skill-icon-list'
 
 const ICONIFY_TYPE_PREFIX = 'skill-icons:';
 
-export function MemeGenerator({ name = 'react'}: {name: string}) {
+export function MemeGenerator({ name }: {name: string}) {
 
   const getIconifyIconName = (name: string) => {
     let iconName = name;
