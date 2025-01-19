@@ -3,9 +3,12 @@
 import { SearchSelector } from '@/components/search-selector'
 import { MemeGenerator } from '@/components/meme-generator';
 import { ThemeProvider } from '@/components/theme-provider';
+import { useState } from 'react';
 
 
 export default function IndexPage() {
+  const [searchInput, setSearchInput] = useState('react')
+
   return (
     <ThemeProvider>
       <main className="container mx-auto px-4 py-8">
@@ -15,8 +18,8 @@ export default function IndexPage() {
         <h3 className="mb-8 text-center text-xl font-bold">
           无语💧 跟你讲不下去，典型的玩梗思维！！
         </h3>
-        <SearchSelector />
-        <MemeGenerator />
+        <SearchSelector value={searchInput} onChange={setSearchInput} />
+        <MemeGenerator name={searchInput} />
       </main>
     </ThemeProvider>
   );
