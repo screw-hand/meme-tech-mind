@@ -1,7 +1,9 @@
 "use client";
 
+import { SearchSelector } from '@/components/search-selector'
 import { MemeGenerator } from '@/components/meme-generator';
 import { ThemeProvider } from '@/components/theme-provider';
+
 
 export default function IndexPage() {
   return (
@@ -13,6 +15,7 @@ export default function IndexPage() {
         <h3 className="mb-8 text-center text-xl font-bold">
           无语💧 跟你讲不下去，典型的玩梗思维！！
         </h3>
+        <SearchSelector />
         <MemeGenerator />
       </main>
     </ThemeProvider>
