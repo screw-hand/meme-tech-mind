@@ -18,7 +18,10 @@ export default function IndexPage() {
         <h3 className="mb-8 text-center text-xl font-bold">
           无语💧 跟你讲不下去，典型的玩梗思维！！
         </h3>
-        <SearchSelector value={searchInput} onChange={setSearchInput} />
+        <div className="mb-5">
+          <SearchSelector value={searchInput} onChange={setSearchInput} />
+        </div>
+
         <MemeGenerator name={searchInput} />
       </main>
     </ThemeProvider>
