@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
 import { Icon } from "@iconify/react";
 import ICON_LIST from '@/config/iconifly-skill-icon-list'
+import html2canvas from 'html2canvas';
 import { Button } from "@/components/ui/button"
 
 const ICONIFY_TYPE_PREFIX = 'skill-icons:';
@@ -22,8 +22,29 @@ export function MemeGenerator({ name }: {name: string}) {
     return result
   }
 
-  const handleGeneratorMeme = () => {
+  const handleGenerateMeme = async () => {
+    const memeEl = document.getElementById('meme');
+    if (!memeEl) return;
 
+    // 临时移除边框
+    const originalBorder = memeEl.style.border;
+    memeEl.style.border = 'none';
+
+    try {
+      const canvas = await html2canvas(memeEl, {
+        backgroundColor: null,
+        scale: 2, // 提高清晰度
+      });
+
+      // 创建下载链接
+      const link = document.createElement('a');
+      link.download = `tech-meme-${name}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } finally {
+      // 恢复边框
+      memeEl.style.border = originalBorder;
+    }
   }
 
   return (
@@ -41,7 +62,7 @@ export function MemeGenerator({ name }: {name: string}) {
       </div>
       {/* control */}
       <div>
-      <Button onClick={handleGeneratorMeme}>
+      <Button onClick={handleGenerateMeme}>
         保存梗图
       </Button>
       </div>
