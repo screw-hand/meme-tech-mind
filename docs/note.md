@@ -12,7 +12,7 @@
 
 ## 疑惑
 
-next.js能用使用auto import系列工具？
+next.js能否使用auto import系列工具？
 
 ## 问题
 
