@@ -26,14 +26,13 @@ export function MemeGenerator({ name }: {name: string}) {
     const memeEl = document.getElementById('meme');
     if (!memeEl) return;
 
-    // 临时移除边框
-    const originalBorder = memeEl.style.border;
-    memeEl.style.border = 'none';
+    // const originalBorder = memeEl.style.border;
+    // memeEl.style.border = 'none';
 
     try {
       const canvas = await html2canvas(memeEl, {
         backgroundColor: null,
-        scale: 2, // 提高清晰度
+        scale: 2,
       });
 
       // 创建下载链接
@@ -43,7 +42,7 @@ export function MemeGenerator({ name }: {name: string}) {
       link.click();
     } finally {
       // 恢复边框
-      memeEl.style.border = originalBorder;
+      // memeEl.style.border = originalBorder;
     }
   }
 
