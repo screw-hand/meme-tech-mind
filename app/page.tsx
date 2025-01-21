@@ -1,10 +1,12 @@
 "use client";
 
+import pkg from '../package.json'
 import { SearchSelector } from '@/components/search-selector'
 import { MemeGenerator } from '@/components/meme-generator';
 import { ThemeProvider } from '@/components/theme-provider';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button'
+
 
 export default function IndexPage() {
   const [searchInput, setSearchInput] = useState('react')
@@ -16,7 +18,7 @@ export default function IndexPage() {
        <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b z-50">
          <div className="container py-4">
            <h1 className="text-2xl font-bold text-center">
-             梗图生成器
+             梗图生成器 v{pkg.version}
            </h1>
          </div>
        </header>
