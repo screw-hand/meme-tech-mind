@@ -1,15 +1,19 @@
 "use client"
 
+import { useState } from "react"
 import { Icon } from "@iconify/react"
 import html2canvas from "html2canvas"
 
 import ICON_LIST from "@/config/iconify-skill-icon-list"
 import { Button } from "@/components/ui/button"
+import { SearchSelector } from "@/components/search-selector"
 
 const ICONIFY_TYPE_PREFIX = "skill-icons:"
 
-export function MemeGenerator({ name }: { name: string }) {
-  const attackTarget = "玩梗"
+const attackTarget = "玩梗"
+
+export function MemeGenerator({ name = "react" }: { name?: string }) {
+  const [searchInput, setSearchInput] = useState("react")
 
   const getIconifyIconName = (name: string) => {
     let iconName = name
@@ -66,6 +70,26 @@ export function MemeGenerator({ name }: { name: string }) {
       {/* control */}
       <div>
         <Button onClick={handleGenerateMeme}>保存梗图</Button>
+      </div>
+
+      <SearchSelector value={searchInput} onChange={setSearchInput} />
+      <div className="fixed inset-x-0 bottom-0 border-t bg-background/80 p-4 backdrop-blur-sm">
+        <div className="container space-y-4">
+          <div className="grid grid-cols-3 gap-4">
+            <Button variant="outline">
+              <Icon icon="uil:copy" />
+              复制
+            </Button>
+            <Button>
+              <Icon icon="uil:download-alt" />
+              下载
+            </Button>
+            <Button>
+              <Icon icon="uil:link" />
+              下载
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   )
