@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react"
 import html2canvas from "html2canvas"
 
-import ICON_LIST from "@/config/iconifly-skill-icon-list"
+import ICON_LIST from "@/config/iconify-skill-icon-list"
 import { Button } from "@/components/ui/button"
 
 const ICONIFY_TYPE_PREFIX = "skill-icons:"
