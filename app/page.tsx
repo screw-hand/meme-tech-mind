@@ -16,7 +16,7 @@ export default function IndexPage() {
        <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b z-50">
          <div className="container py-4">
            <h1 className="text-2xl font-bold text-center">
-             梗图生成器💧
+             梗图生成器
            </h1>
          </div>
        </header>
