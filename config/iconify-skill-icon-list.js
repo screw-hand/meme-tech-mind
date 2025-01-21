@@ -399,7 +399,7 @@ const list = [
   "yew-dark",
   "yew-light",
   "zig-dark",
-  "zig-light"
+  "zig-light",
 ]
 
 export default list
