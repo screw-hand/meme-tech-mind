@@ -27,7 +27,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
       {/* meme border */}
       <div className="meme-border border-gray border-2 border-dashed">
         {/* meme content */}
-        <div className="meme-content relative mx-auto text-center">
+        <div id="meme-content" className="relative mx-auto text-center">
           <Icon
             icon={getIconifyIconName(settings.source)}
             className="mx-auto text-center text-9xl"
