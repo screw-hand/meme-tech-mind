@@ -39,3 +39,5 @@ spawn shadcn-ui ENOENT
     at onErrorNT (node:internal/child_process:483:16)
     at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 ```
+
+### 这个项目的tsx文件，无法使用选择用eslint格式化
