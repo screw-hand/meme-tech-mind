@@ -1,17 +1,30 @@
+import html2canvas from "html2canvas"
+
+import { MemeSettingsType } from "@/types/meme-settings"
+
 /**
- * 复制图片到剪贴板
- * @param imageUrl
+ * 复制梗图到剪贴板
+ * @param dom
  * @returns
  */
-export const copyMemeToClipboard = async (imageUrl: string) => {
+export const copyMemeToClipboard = async (dom: HTMLElement | null) => {
+  if (!dom) {
+    return
+  }
   try {
-    const response = await fetch(imageUrl)
-    const blob = await response.blob()
-    await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
-    return true
-  } catch (error) {
-    console.error("复制图片失败:", error)
-    return false
+    const canvas = await html2canvas(dom)
+    const blob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, "image/png")
+    })
+    if (blob) {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "image/png": blob,
+        }),
+      ])
+    }
+  } catch (e) {
+    console.error("复制失败", e)
   }
 }
 
@@ -21,11 +34,14 @@ export const copyMemeToClipboard = async (imageUrl: string) => {
  * @param fileName
  */
 export const downloadMeme = (
-  imageUrl: string,
+  dom: HTMLElement | null,
   fileName: string = "meme.png"
 ) => {
+  if (!dom) {
+    return
+  }
   const link = document.createElement("a")
-  link.href = imageUrl
+  link.href = dom.innerText
   link.download = fileName
   document.body.appendChild(link)
   link.click()
@@ -37,12 +53,6 @@ export const downloadMeme = (
  * @param imageUrl
  * @returns
  */
-export const copyMemeLink = async (imageUrl: string) => {
-  try {
-    await navigator.clipboard.writeText(imageUrl)
-    return true
-  } catch (error) {
-    console.error("复制链接失败:", error)
-    return false
-  }
+export const copyMemeLink = async (settings: MemeSettingsType) => {
+  console.log(settings)
 }
