@@ -34,8 +34,9 @@ export function MemePreview({ settings }: MemePreviewProps) {
           />
           <span className="absolute right-1 top-[20px] text-5xl">💧</span>
           <p>
-            无语,跟你讲不下去，
-            <br /> 典型的{settings.target}思维
+            无语 跟你讲不下去
+            <br />
+            典型的{settings.target}思维
           </p>
         </div>
         {/* meme content */}
