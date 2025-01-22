@@ -1,29 +1,27 @@
-"use client";
+"use client"
 
-import { SearchSelector } from '@/components/search-selector'
-import { MemeGenerator } from '@/components/meme-generator';
-import { ThemeProvider } from '@/components/theme-provider';
-import { useState } from 'react';
+import { MemeGenerator } from "@/components/meme-generator"
+import { ThemeProvider } from "@/components/theme-provider"
 
+import pkg from "../package.json"
 
 export default function IndexPage() {
-  const [searchInput, setSearchInput] = useState('react')
-
   return (
     <ThemeProvider>
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="mb-8 text-center text-3xl font-bold">
-          梗图生成器
-        </h1>
-        <h3 className="mb-8 text-center text-xl font-bold">
-          无语💧 跟你讲不下去，典型的玩梗思维！！
-        </h3>
-        <div className="mb-5">
-          <SearchSelector value={searchInput} onChange={setSearchInput} />
+      <main className="min-h-screen bg-background">
+        {/* header start */}
+        <header className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
+          <div className="container py-1.5">
+            <h1 className="text-center text-2xl font-bold">
+              梗图生成器 v{pkg.version}
+            </h1>
+          </div>
+        </header>
+        {/* header end */}
+        <div className="container pt-[calc(var(--header-height)+var(--top-bar-height))]">
+          <MemeGenerator />
         </div>
-
-        <MemeGenerator name={searchInput} />
       </main>
     </ThemeProvider>
-  );
+  )
 }

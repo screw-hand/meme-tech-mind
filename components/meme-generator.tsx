@@ -1,71 +1,61 @@
-"use client";
-import { Icon } from "@iconify/react";
-import ICON_LIST from '@/config/iconifly-skill-icon-list'
-import html2canvas from 'html2canvas';
-import { Button } from "@/components/ui/button"
+"use client"
 
-const ICONIFY_TYPE_PREFIX = 'skill-icons:';
+import { useState } from "react"
+import {
+  copyMemeLink,
+  copyMemeToClipboard,
+  downloadMeme,
+} from "@/utils/meme-operations"
 
-export function MemeGenerator({ name }: {name: string}) {
-  const attackTarget = '玩梗'
+import { MemeOperatorType } from "@/types/meme-operator"
+import { MemeSettingsType } from "@/types/meme-settings"
+import { MemeOperations } from "@/components/meme-operations"
+import { MemePreview } from "@/components/meme-preview"
+import { MemeSettings } from "@/components/meme-settings"
 
+export function MemeGenerator() {
+  const [settings, setSettings] = useState<MemeSettingsType>({
+    source: "react",
+    target: "vue",
+    specialEffect: () => "",
+  })
 
-  const getIconifyIconName = (name: string) => {
-    let iconName = name;
-    let result = `${ICONIFY_TYPE_PREFIX}${iconName}`
-    const filterIconifyList = ICON_LIST.filter(x=> x.includes(name))
-    if (filterIconifyList?.length > 0) {
-      iconName = filterIconifyList[0]
-    }
-    result = `${ICONIFY_TYPE_PREFIX}${iconName}`
-    console.log('getIconifyIconName', result)
-    return result
+  const handleSettingsChange = (newSettings: MemeSettingsType) => {
+    setSettings(newSettings)
   }
 
-  const handleGenerateMeme = async () => {
-    const memeEl = document.getElementById('meme');
-    if (!memeEl) return;
+  const handleOperatorMeme = (operator: MemeOperatorType) => {
+    console.log("operator", operator)
+    console.log("Generating meme with settings:", settings)
 
-    // 临时移除边框
-    const originalBorder = memeEl.style.border;
-    memeEl.style.border = 'none';
+    const memeContentDom = document.querySelector(
+      "#meme-content"
+    ) as HTMLElement
 
-    try {
-      const canvas = await html2canvas(memeEl, {
-        backgroundColor: null,
-        scale: 2, // 提高清晰度
-      });
-
-      // 创建下载链接
-      const link = document.createElement('a');
-      link.download = `tech-meme-${name}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    } finally {
-      // 恢复边框
-      memeEl.style.border = originalBorder;
+    if (operator === MemeOperatorType.COPY) {
+      copyMemeToClipboard(memeContentDom)
+    } else if (operator === MemeOperatorType.DOWNLOAD) {
+      downloadMeme(memeContentDom)
+    } else if (operator === MemeOperatorType.SHARE_LINK) {
+      copyMemeLink(settings)
     }
   }
 
   return (
-    <div className="space-y-6 text-center">
-      {/* meme start */}
-      <div id="meme" className="relative inline-block px-5 py-5 border-2">
-        <Icon icon={getIconifyIconName(name)} className="text-9xl text-center mx-auto" />
-        {/* TODO position need to let user custom config */}
-        <span className="text-5xl absolute right-1 top-[20px]">
-          💧
-        </span>
-        <p>无语,跟你讲不下去，<br/> 典型的{attackTarget}思维
-        </p>
-      {/* meme end */}
-      </div>
-      {/* control */}
-      <div>
-      <Button onClick={handleGenerateMeme}>
-        保存梗图
-      </Button>
-      </div>
+    <div>
+      {/* meme 预览 */}
+      <MemePreview settings={settings} />
+      {/* meme 设置 */}
+      {false && (
+        <MemeSettings
+          settings={settings}
+          onSettingsChange={handleSettingsChange}
+        />
+      )}
+      {/* meme 操作 */}
+      <MemeOperations
+        onGenerateMeme={(operator) => handleOperatorMeme(operator)}
+      />
     </div>
   )
 }

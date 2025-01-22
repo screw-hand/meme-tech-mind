@@ -16,7 +16,6 @@ next.js能否使用auto import系列工具？
 
 ## 问题
 
-
 ### pnpm无法跟shadcn-ui很好协同工作
 
 以下命令的预期结果是会生成`@/components/ui/input.tsx`文件；
@@ -40,3 +39,5 @@ spawn shadcn-ui ENOENT
     at onErrorNT (node:internal/child_process:483:16)
     at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 ```
+
+### 这个项目的tsx文件，无法使用选择用eslint格式化
