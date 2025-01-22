@@ -18,10 +18,8 @@ export default function IndexPage() {
           </div>
         </header>
         {/* header end */}
-        <div className="container pb-16 pt-20">
-          <div className="space-y-6">
-            <MemeGenerator />
-          </div>
+        <div className="container pt-[calc(var(--header-height)+var(--top-bar-height))]">
+          <MemeGenerator />
         </div>
       </main>
     </ThemeProvider>
