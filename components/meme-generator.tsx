@@ -46,10 +46,12 @@ export function MemeGenerator() {
       {/* meme 预览 */}
       <MemePreview settings={settings} />
       {/* meme 设置 */}
-      <MemeSettings
-        settings={settings}
-        onSettingsChange={handleSettingsChange}
-      />
+      {false && (
+        <MemeSettings
+          settings={settings}
+          onSettingsChange={handleSettingsChange}
+        />
+      )}
       {/* meme 操作 */}
       <MemeOperations
         onGenerateMeme={(operator) => handleOperatorMeme(operator)}

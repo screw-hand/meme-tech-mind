@@ -9,7 +9,7 @@ interface MemeOperationsProps {
 
 export function MemeOperations({ onGenerateMeme }: MemeOperationsProps) {
   return (
-    <div className="mx-4 grid grid-cols-3 gap-4">
+    <div className="mx-4 grid grid-cols-1 gap-4">
       <Button
         variant="outline"
         onClick={() => onGenerateMeme(MemeOperatorType.COPY)}
@@ -17,14 +17,14 @@ export function MemeOperations({ onGenerateMeme }: MemeOperationsProps) {
         <Icon icon="uil:copy" />
         复制
       </Button>
-      <Button onClick={() => onGenerateMeme(MemeOperatorType.DOWNLOAD)}>
+      {/* <Button onClick={() => onGenerateMeme(MemeOperatorType.DOWNLOAD)}>
         <Icon icon="uil:download-alt" />
         下载
       </Button>
       <Button onClick={() => onGenerateMeme(MemeOperatorType.SHARE_LINK)}>
         <Icon icon="uil:link" />
         下载
-      </Button>
+      </Button> */}
     </div>
   )
 }
