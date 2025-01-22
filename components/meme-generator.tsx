@@ -41,16 +41,14 @@ export function MemeGenerator() {
   }
 
   return (
-    <div>
+    <div className="mx-4">
       {/* meme 预览 */}
       <MemePreview settings={settings} />
       {/* meme 设置 */}
-      {false && (
-        <MemeSettings
-          settings={settings}
-          onSettingsChange={handleSettingsChange}
-        />
-      )}
+      <MemeSettings
+        settings={settings}
+        onSettingsChange={handleSettingsChange}
+      />
       {/* meme 操作 */}
       <MemeOperations
         onGenerateMeme={(operator) => handleOperatorMeme(operator)}

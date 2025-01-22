@@ -15,7 +15,7 @@ export const DefaultMeMeSettings: MemeSettingsType = {
   background: {
     size: 180,
     color: "#fff",
-    borderRadius: "30",
+    borderRadius: 30,
     paddingX: 10,
     paddingY: 10,
     gap: 3,

@@ -4,7 +4,7 @@ export interface MemeSettingsType {
   /* 攻击对象 */
   target: string
   /* 特殊效果 */
-  specialEffect?: (settings: MemeSettingsType) => string
+  specialEffect?: ((settings: MemeSettingsType) => string) | string
   icon: {
     size: number
   }
@@ -16,7 +16,7 @@ export interface MemeSettingsType {
   background: {
     size: number
     color: string
-    borderRadius: string
+    borderRadius: number
     paddingX: number
     paddingY: number
     gap: number
