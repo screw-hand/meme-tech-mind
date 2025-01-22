@@ -27,17 +27,19 @@ export function MemePreview({ settings }: MemePreviewProps) {
       {/* meme border */}
       <div className="meme-border border-gray border-2 border-dashed">
         {/* meme content */}
-        <div id="meme-content" className="relative mx-auto text-center">
-          <Icon
-            icon={getIconifyIconName(settings.source)}
-            className="mx-auto text-center text-9xl"
-          />
-          <span className="absolute right-1 top-[20px] text-5xl">💧</span>
-          <p>
-            无语 跟你讲不下去
-            <br />
-            典型的{settings.target}思维
-          </p>
+        <div
+          id="meme-content"
+          className="item-center relative mx-auto flex flex-initial flex-col pb-[5px] text-center"
+          style={{ width: "130px" }}
+        >
+          <div className="mx-auto justify-self-center">
+            <Icon
+              icon={getIconifyIconName(settings.source)}
+              className="size-[130px]"
+            />
+          </div>
+          <span className="absolute right-1 top-[10px] text-5xl">💧</span>
+          <p>无语 跟你讲不下去 典型的{settings.target}思维</p>
         </div>
         {/* meme content */}
       </div>
