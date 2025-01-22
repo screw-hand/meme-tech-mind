@@ -9,15 +9,14 @@ import {
 
 import { MemeOperatorType } from "@/types/meme-operator"
 import { MemeSettingsType } from "@/types/meme-settings"
+import { DefaultMeMeSettings } from "@/config/default-meme-settings"
 import { MemeOperations } from "@/components/meme-operations"
 import { MemePreview } from "@/components/meme-preview"
 import { MemeSettings } from "@/components/meme-settings"
 
 export function MemeGenerator() {
   const [settings, setSettings] = useState<MemeSettingsType>({
-    source: "react",
-    target: "vue",
-    specialEffect: () => "",
+    ...DefaultMeMeSettings,
   })
 
   const handleSettingsChange = (newSettings: MemeSettingsType) => {
