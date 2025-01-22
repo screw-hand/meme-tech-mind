@@ -144,36 +144,38 @@ export function MemeSettings({
         />
       </SettingBar>
       <SettingBar label={<span>背景水平内边距</span>}>
-        <Input
-          type="number"
-          name="paddingX"
-          className="h-8 px-2 text-sm"
-          value={settings.background.paddingX}
-          onChange={(e) =>
-            onSettingsChange({
-              ...settings,
-              background: {
-                ...settings.background,
-                paddingX: Number(e.target.value),
-              },
-            })
-          }
-        />
-        <Input
-          type="number"
-          name="paddingY"
-          className="h-8 px-2 text-sm"
-          value={settings.background.paddingY}
-          onChange={(e) =>
-            onSettingsChange({
-              ...settings,
-              background: {
-                ...settings.background,
-                paddingY: Number(e.target.value),
-              },
-            })
-          }
-        />
+        <div className="flex flex-row gap-2">
+          <Input
+            type="number"
+            name="paddingX"
+            className="h-8 px-2 text-sm"
+            value={settings.background.paddingX}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                background: {
+                  ...settings.background,
+                  paddingX: Number(e.target.value),
+                },
+              })
+            }
+          />
+          <Input
+            type="number"
+            name="paddingY"
+            className="h-8 px-2 text-sm"
+            value={settings.background.paddingY}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                background: {
+                  ...settings.background,
+                  paddingY: Number(e.target.value),
+                },
+              })
+            }
+          />
+        </div>
       </SettingBar>
       <SettingBar label={<span>背景与文字间距</span>}>
         <Input
