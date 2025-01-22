@@ -11,10 +11,6 @@ export function MemeSettings({
   settings,
   onSettingsChange,
 }: MemeSettingsProps) {
-  const handleSave = () => {
-    onSettingsChange(settings)
-  }
-
   return (
     <div className="meme-settings my-3 flex flex-col gap-3">
       <SettingBar label={<span>主角</span>}>
@@ -236,7 +232,10 @@ export function MemeSettings({
           }
         />
       </SettingBar>
-      <SettingBar label={<span>文字字体</span>}>
+      <SettingBar
+        label={<span>文字字体</span>}
+        other={<span>在写了在写了！</span>}
+      >
         <Input
           type="text"
           name="fontFamily"
@@ -251,7 +250,10 @@ export function MemeSettings({
           }
         />
       </SettingBar>
-      <SettingBar label={<span>特殊效果</span>}>
+      <SettingBar
+        label={<span>特殊效果</span>}
+        other={<span>再等等，再等等！</span>}
+      >
         <Input
           type="text"
           disabled

@@ -1,16 +1,21 @@
 export function SettingBar({
   label,
+  other,
   children,
 }: {
   label: React.ReactNode
+  other?: React.ReactNode
   children: React.ReactNode
 }) {
   return (
     <div className="setting-bar">
-      <label className="flex items-center gap-2 text-sm font-medium">
-        <p className="flex-initial">{label}</p>
-        <div className="flex-auto">{children}</div>
-      </label>
+      <div className="item-center flex gap-2">
+        <p className="flex-none py-[6px] text-sm font-medium">{label}</p>
+        <div className="flex flex-auto flex-col">
+          {children}
+          {other && <div className="mt-2 text-xs text-gray-500">{other}</div>}
+        </div>
+      </div>
     </div>
   )
 }
