@@ -5,6 +5,7 @@ import {
   copyMemeLink,
   copyMemeToClipboard,
   downloadMeme,
+  shareMeme,
 } from "@/utils/meme-operations"
 
 import { MemeOperatorType } from "@/types/meme-operator"
@@ -34,7 +35,12 @@ export function MemeGenerator() {
     if (operator === MemeOperatorType.COPY) {
       copyMemeToClipboard(memeContentDom)
     } else if (operator === MemeOperatorType.DOWNLOAD) {
-      downloadMeme(memeContentDom)
+      downloadMeme(
+        memeContentDom,
+        `meme-${settings.source}-${settings.target}.png`
+      )
+    } else if (operator === MemeOperatorType.SHARE) {
+      shareMeme(memeContentDom)
     } else if (operator === MemeOperatorType.SHARE_LINK) {
       copyMemeLink(settings)
     }
@@ -46,17 +52,17 @@ export function MemeGenerator() {
       <div className="my-4">
         <MemePreview settings={settings} />
       </div>
+      {/* meme 操作 */}
+      <div className="my-4">
+        <MemeOperations
+          onGenerateMeme={(operator) => handleOperatorMeme(operator)}
+        />
+      </div>
       {/* meme 设置 */}
       <div className="my-4">
         <MemeSettings
           settings={settings}
           onSettingsChange={handleSettingsChange}
-        />
-      </div>
-      {/* meme 操作 */}
-      <div className="my-4">
-        <MemeOperations
-          onGenerateMeme={(operator) => handleOperatorMeme(operator)}
         />
       </div>
     </div>
