@@ -252,7 +252,7 @@ export function MemeSettings({
       </SettingBar>
       <SettingBar
         label={<span>特殊效果</span>}
-        other={<span>再等等，再等等！</span>}
+        other={<span>再等等再等等！</span>}
       >
         <Input
           type="text"
