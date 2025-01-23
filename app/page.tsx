@@ -1,5 +1,6 @@
 "use client"
 
+import { Toaster } from "@/components/ui/sonner"
 import { MemeGenerator } from "@/components/meme-generator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -22,6 +23,7 @@ export default function IndexPage() {
           <MemeGenerator />
         </div>
       </main>
+      <Toaster position="top-center" closeButton />
     </ThemeProvider>
   )
 }
