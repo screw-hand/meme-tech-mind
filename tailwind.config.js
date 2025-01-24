@@ -12,6 +12,13 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    /* FIXME 没有解决我要解决的问题！ */
+    safelist: [
+      // 如果你确定要用到某些动态类名,可以在这里列出来
+      {
+        pattern: /^(text|right|top)-\[\d+px\]/, // 匹配你要用的动态类名模式
+      },
+    ],
     extend: {
       colors: {
         border: "hsl(var(--border))",

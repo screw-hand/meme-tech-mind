@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react"
+import clsx from "clsx"
 
 import { MemeSettingsType } from "@/types/meme-settings"
 import ICON_LIST from "@/config/iconify-skill-icon-list"
@@ -30,16 +31,51 @@ export function MemePreview({ settings }: MemePreviewProps) {
         <div
           id="meme-content"
           className="item-center relative mx-auto flex flex-initial flex-col pb-[5px] text-center"
-          style={{ width: "130px" }}
+          style={{
+            width: `${settings.background.size}px`,
+            // height: `${settings.background.size}px`,
+            backgroundColor: `${settings.background.color}`,
+            borderRadius: `${settings.background.borderRadius}px`,
+            padding: `${settings.background.paddingY}px ${settings.background.paddingX}px`,
+            gap: `${settings.background.gap}px`,
+          }}
         >
           <div className="mx-auto justify-self-center">
             <Icon
               icon={getIconifyIconName(settings.source)}
-              className="size-[130px]"
+              // FIXME it not works.
+              // className={`size-[${settings.icon.size}px]`}
+              style={{
+                fontSize: `${settings.icon.size}px`,
+              }}
             />
           </div>
-          <span className="absolute right-1 top-[10px] text-5xl">💧</span>
-          <p>无语 跟你讲不下去 典型的{settings.target}思维</p>
+          <span
+            className={clsx(
+              "absolute"
+              // FIXME it not works.
+              // `text-[${settings.emoji.size}px]`,
+              // `right-[${settings.emoji.x}px]`,
+              // `top-[${settings.emoji.y}px]`
+            )}
+            style={{
+              fontSize: `${settings.emoji.size}px`,
+              right: `${settings.emoji.x}px`,
+              top: `${settings.emoji.y}px`,
+            }}
+          >
+            💧
+          </span>
+          <p
+            style={{
+              width: `${settings.text.width}`,
+              color: `${settings.text.color}`,
+              fontFamily: `${settings.text.fontFamily}`,
+              fontSize: `${settings.text.fontSize}px`,
+            }}
+          >
+            无语 跟你讲不下去 典型的{settings.target}思维
+          </p>
         </div>
         {/* meme content */}
       </div>

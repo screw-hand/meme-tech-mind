@@ -5,19 +5,19 @@ import {
   copyMemeLink,
   copyMemeToClipboard,
   downloadMeme,
+  shareMeme,
 } from "@/utils/meme-operations"
 
 import { MemeOperatorType } from "@/types/meme-operator"
 import { MemeSettingsType } from "@/types/meme-settings"
+import { DefaultMeMeSettings } from "@/config/default-meme-settings"
 import { MemeOperations } from "@/components/meme-operations"
 import { MemePreview } from "@/components/meme-preview"
 import { MemeSettings } from "@/components/meme-settings"
 
 export function MemeGenerator() {
   const [settings, setSettings] = useState<MemeSettingsType>({
-    source: "react",
-    target: "vue",
-    specialEffect: () => "",
+    ...DefaultMeMeSettings,
   })
 
   const handleSettingsChange = (newSettings: MemeSettingsType) => {
@@ -35,27 +35,36 @@ export function MemeGenerator() {
     if (operator === MemeOperatorType.COPY) {
       copyMemeToClipboard(memeContentDom)
     } else if (operator === MemeOperatorType.DOWNLOAD) {
-      downloadMeme(memeContentDom)
+      downloadMeme(
+        memeContentDom,
+        `meme-${settings.source}-${settings.target}.png`
+      )
+    } else if (operator === MemeOperatorType.SHARE) {
+      shareMeme(memeContentDom)
     } else if (operator === MemeOperatorType.SHARE_LINK) {
       copyMemeLink(settings)
     }
   }
 
   return (
-    <div>
+    <div className="mx-4">
       {/* meme 预览 */}
-      <MemePreview settings={settings} />
+      <div className="my-4">
+        <MemePreview settings={settings} />
+      </div>
+      {/* meme 操作 */}
+      <div className="my-4">
+        <MemeOperations
+          onGenerateMeme={(operator) => handleOperatorMeme(operator)}
+        />
+      </div>
       {/* meme 设置 */}
-      {false && (
+      <div className="my-4">
         <MemeSettings
           settings={settings}
           onSettingsChange={handleSettingsChange}
         />
-      )}
-      {/* meme 操作 */}
-      <MemeOperations
-        onGenerateMeme={(operator) => handleOperatorMeme(operator)}
-      />
+      </div>
     </div>
   )
 }
