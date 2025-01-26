@@ -259,11 +259,11 @@ export function MemeSettings({
           disabled
           name="specialEffect"
           className="h-8 px-2 text-sm"
-          value={settings.specialEffect as string}
+          value={settings.specialEffect}
           onChange={(e) =>
             onSettingsChange({
               ...settings,
-              specialEffect: () => e.target.value,
+              specialEffect: e.target.value,
             })
           }
         />

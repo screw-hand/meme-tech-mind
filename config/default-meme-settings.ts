@@ -3,7 +3,7 @@ import { MemeSettingsType } from "@/types/meme-settings"
 export const DefaultMeMeSettings: MemeSettingsType = {
   source: "react",
   target: "vue",
-  specialEffect: () => "",
+  specialEffect: "",
   icon: {
     size: 130,
   },
