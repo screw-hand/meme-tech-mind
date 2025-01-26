@@ -3,9 +3,9 @@ export function SettingBar({
   other,
   children,
 }: {
-  label: React.ReactNode
+  label?: React.ReactNode
   other?: React.ReactNode
-  children: React.ReactNode
+  children?: React.ReactNode
 }) {
   return (
     <div className="setting-bar">
