@@ -66,13 +66,19 @@ export function MemeSearchIcon({
           )
         })}
       </div>
-      {iconList.length > 8 && (
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-blue-500 hover:underline"
-        >
-          {isExpanded ? "点击折叠" : `显示更多（共 ${iconList.length} 个结果）`}
-        </button>
+      {iconList.length === 0 ? (
+        <p className=" text-center text-red-500">搜不到，换个词吧。</p>
+      ) : (
+        iconList.length > 8 && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-blue-500 hover:underline"
+          >
+            {isExpanded
+              ? "点击折叠"
+              : `显示更多（共 ${iconList.length} 个结果）`}
+          </button>
+        )
       )}
     </div>
   )
