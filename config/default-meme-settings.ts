@@ -1,7 +1,8 @@
 import { MemeSettingsType } from "@/types/meme-settings"
 
 export const DefaultMeMeSettings: MemeSettingsType = {
-  source: "react",
+  searchKey: "react",
+  source: "skill-icons:react-dark",
   target: "vue",
   specialEffect: "",
   icon: {

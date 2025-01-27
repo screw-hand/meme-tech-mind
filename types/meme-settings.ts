@@ -1,4 +1,6 @@
 export interface MemeSettingsType {
+  /* 搜索关键词 */
+  searchKey: string
   /* 主角 */
   source: string
   /* 攻击对象 */

@@ -1,5 +1,6 @@
 import { MemeSettingsType } from "@/types/meme-settings"
 import { Input } from "@/components/ui/input"
+import { MemeSearchIcon } from "@/components/meme-search-icon"
 import { SettingBar } from "@/components/setting-bar"
 
 import { Slider } from "./ui/slider"
@@ -13,19 +14,30 @@ export function MemeSettings({
   settings,
   onSettingsChange,
 }: MemeSettingsProps) {
+  const handleIconClick = (icon: string) => {
+    onSettingsChange({ ...settings, source: icon })
+  }
   return (
     <div className="meme-settings my-3 flex flex-col gap-3">
       {/* 基本信息 */}
       <section className="flex flex-col gap-3">
         <h3 className="text-center text-lg font-medium">基本信息</h3>
-        <SettingBar label="主角">
+        <SettingBar
+          label="搜索"
+          other={
+            <MemeSearchIcon
+              searchKey={settings.searchKey}
+              onIconClick={handleIconClick}
+            />
+          }
+        >
           <Input
             type="text"
-            name="source"
+            name="searchKey"
             className="h-8 px-2 text-sm"
-            value={settings.source}
+            value={settings.searchKey}
             onChange={(e) =>
-              onSettingsChange({ ...settings, source: e.target.value })
+              onSettingsChange({ ...settings, searchKey: e.target.value })
             }
           />
         </SettingBar>

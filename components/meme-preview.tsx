@@ -2,27 +2,12 @@ import { Icon } from "@iconify/react"
 import clsx from "clsx"
 
 import { MemeSettingsType } from "@/types/meme-settings"
-import ICON_LIST from "@/config/iconify-skill-icon-list"
 
 interface MemePreviewProps {
   settings: MemeSettingsType
 }
 
-const ICONIFY_TYPE_PREFIX = "skill-icons:"
-
 export function MemePreview({ settings }: MemePreviewProps) {
-  const getIconifyIconName = (name: string) => {
-    let iconName = name
-    let result = `${ICONIFY_TYPE_PREFIX}${iconName}`
-    const filterIconifyList = ICON_LIST.filter((x) => x.includes(name))
-    if (filterIconifyList?.length > 0) {
-      iconName = filterIconifyList[0]
-    }
-    result = `${ICONIFY_TYPE_PREFIX}${iconName}`
-    console.log("getIconifyIconName", result)
-    return result
-  }
-
   return (
     <div className="meme-preview flex items-center justify-center">
       {/* meme border */}
@@ -42,7 +27,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
         >
           <div className="mx-auto justify-self-center">
             <Icon
-              icon={getIconifyIconName(settings.source)}
+              icon={settings.source}
               // FIXME it not works.
               // className={`size-[${settings.icon.size}px]`}
               style={{
