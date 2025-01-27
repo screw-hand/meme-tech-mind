@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 import { MemeSettingsType } from "@/types/meme-settings"
 import { Input } from "@/components/ui/input"
 import { MemeSearchIcon } from "@/components/meme-search-icon"
@@ -16,6 +18,16 @@ export function MemeSettings({
   settings,
   onSettingsChange,
 }: MemeSettingsProps) {
+  const [maxWidth, setMaxWidth] = useState(1400 - 32) // 默认值
+
+  useEffect(() => {
+    setMaxWidth(
+      window.innerWidth > 1400
+        ? 1400 - 32 // 1400px - 2rem
+        : window.innerWidth - 32
+    )
+  }, [])
+
   const handleIconClick = (icon: string) => {
     onSettingsChange({ ...settings, source: icon })
   }
@@ -133,11 +145,7 @@ export function MemeSettings({
           <div className="flex items-center gap-2">
             <Slider
               value={[settings.background.size]}
-              max={
-                window.innerWidth > 1400
-                  ? 1400 - 16 * 2
-                  : window.innerWidth - 16 * 2
-              }
+              max={maxWidth}
               step={1}
               onValueChange={(value) =>
                 onSettingsChange({
