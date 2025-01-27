@@ -1,3 +1,5 @@
+"use client"
+
 import { MemeSettingsType } from "@/types/meme-settings"
 import { Input } from "@/components/ui/input"
 import { MemeSearchIcon } from "@/components/meme-search-icon"
