@@ -22,11 +22,11 @@ export interface MemeSettingsType {
     borderRadius: number
     paddingX: number
     paddingY: number
-    gap: number
   }
   text: {
     width: number
     color: string
+    marginTop: number
     fontSize: number
     fontFamily: string
   }

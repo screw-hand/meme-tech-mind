@@ -223,25 +223,6 @@ export function MemeSettings({
             </div>
           </div>
         </SettingBar>
-        <SettingBar label={<span>背景与文字间距</span>}>
-          <div className="flex items-center gap-2">
-            <Slider
-              value={[settings.background.gap]}
-              max={100}
-              step={1}
-              onValueChange={(value) =>
-                onSettingsChange({
-                  ...settings,
-                  background: {
-                    ...settings.background,
-                    gap: value[0],
-                  },
-                })
-              }
-            />
-            <span className="flex-none">{settings.background.gap}</span>
-          </div>
-        </SettingBar>
       </section>
       {/* 文字设置 */}
       <section className="flex flex-col gap-3">
@@ -290,6 +271,26 @@ export function MemeSettings({
               }
             />
             <span className="flex-none">{settings.text.fontSize}</span>
+          </div>
+        </SettingBar>
+        <SettingBar label={<span>图标与文字间距</span>}>
+          <div className="flex items-center gap-2">
+            <Slider
+              value={[settings.text.marginTop]}
+              min={-50}
+              max={100}
+              step={1}
+              onValueChange={(value) =>
+                onSettingsChange({
+                  ...settings,
+                  text: {
+                    ...settings.text,
+                    marginTop: value[0],
+                  },
+                })
+              }
+            />
+            <span className="flex-none">{settings.text.marginTop}</span>
           </div>
         </SettingBar>
         <SettingBar

@@ -19,11 +19,11 @@ export const DefaultMeMeSettings: MemeSettingsType = {
     borderRadius: 30,
     paddingX: 10,
     paddingY: 10,
-    gap: 3,
   },
   text: {
     width: 180,
     color: "#000000",
+    marginTop: 3,
     fontSize: 18,
     fontFamily: "Arial",
   },

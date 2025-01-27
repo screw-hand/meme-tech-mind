@@ -22,7 +22,6 @@ export function MemePreview({ settings }: MemePreviewProps) {
             backgroundColor: `${settings.background.color}`,
             borderRadius: `${settings.background.borderRadius}px`,
             padding: `${settings.background.paddingY}px ${settings.background.paddingX}px`,
-            gap: `${settings.background.gap}px`,
           }}
         >
           <div className="mx-auto justify-self-center">
@@ -43,6 +42,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
               // `right-[${settings.emoji.x}px]`,
               // `top-[${settings.emoji.y}px]`
             )}
+            // FIXME html2canvas，会让emoji错位
             style={{
               fontSize: `${settings.emoji.size}px`,
               right: `${settings.emoji.x}px`,
@@ -57,6 +57,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
               color: `${settings.text.color}`,
               fontFamily: `${settings.text.fontFamily}`,
               fontSize: `${settings.text.fontSize}px`,
+              marginTop: `${settings.text.marginTop}px`,
             }}
           >
             无语 跟你讲不下去 典型的{settings.target}思维
