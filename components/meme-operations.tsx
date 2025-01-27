@@ -1,3 +1,5 @@
+"use client"
+
 import { Icon } from "@iconify/react"
 
 import { MemeOperatorType } from "@/types/meme-operator"

@@ -41,3 +41,7 @@ spawn shadcn-ui ENOENT
 ```
 
 ### 这个项目的tsx文件，无法使用选择用eslint格式化
+
+```
+扩展 'ESLint' 配置为格式化程序，但不能格式化 'TypeScript JSX'-文件
+```
