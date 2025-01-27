@@ -14,7 +14,7 @@ export const DefaultMeMeSettings: MemeSettingsType = {
   },
   background: {
     size: 180,
-    color: "#fff",
+    color: "#ffffff",
     borderRadius: 30,
     paddingX: 10,
     paddingY: 10,
@@ -22,7 +22,7 @@ export const DefaultMeMeSettings: MemeSettingsType = {
   },
   text: {
     width: 180,
-    color: "#000",
+    color: "#000000",
     fontSize: 18,
     fontFamily: "Arial",
   },

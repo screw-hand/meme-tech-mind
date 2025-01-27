@@ -30,7 +30,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
         {/* meme content */}
         <div
           id="meme-content"
-          className="item-center relative mx-auto flex flex-initial flex-col pb-[5px] text-center"
+          className="item-center relative mx-auto flex flex-initial flex-col overflow-hidden pb-[5px] text-center"
           style={{
             width: `${settings.background.size}px`,
             // height: `${settings.background.size}px`,
