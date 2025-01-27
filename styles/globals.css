@@ -36,8 +36,8 @@
     --radius: 0.5rem;
 
     /* my custom variables */
-    --header-height: 45px; /* 根据实际情况调整 */
-    --top-bar-height: 20px; /* 根据实际情况调整 */
+    --header-height: 45px;
+    --top-bar-height: 20px;
   }
 
   .dark {
