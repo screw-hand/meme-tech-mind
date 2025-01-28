@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 
 import ICON_LIST from "@/config/iconify-skill-icon-list"
@@ -29,15 +29,44 @@ export function MemeSearchIcon({
     onIconClick(icon)
   }
 
+  const handleUploadIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith("image/")) {
+      alert("请上传图片文件")
+      return
+    }
+
+    const imageUrl = URL.createObjectURL(file)
+    onIconClick(imageUrl)
+
+    e.target.value = ""
+  }
+
+  const handleClearUploadIcon = useCallback(() => {
+    iconList.forEach((url) => {
+      if (url.startsWith("blob:")) {
+        URL.revokeObjectURL(url)
+      }
+    })
+  }, [iconList])
+
   useEffect(() => {
     setIconList(getIconifyIconName(searchKey))
     setIsExpanded(false)
   }, [searchKey])
 
+  useEffect(() => {
+    return () => {
+      handleClearUploadIcon()
+    }
+  }, [handleClearUploadIcon])
+
   const displayedIcons = isExpanded ? iconList : iconList.slice(0, 8)
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="meme-search-icon flex flex-col gap-2">
       <p>
         目前只支持
         <a
@@ -54,7 +83,18 @@ export function MemeSearchIcon({
         </span>
         不用加）
       </p>
-      <div className="flex flex-wrap gap-3">
+      <div className="icon-list flex flex-wrap gap-3">
+        <label className="flex w-full cursor-pointer flex-col items-center justify-center border p-2 hover:bg-gray-50">
+          <input
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={handleUploadIcon}
+          />
+          <Icon icon="uil:image-upload" className="h-20 w-full" />
+          <p>上传icon</p>
+        </label>
+
         {displayedIcons.map((icon) => {
           return (
             <Icon

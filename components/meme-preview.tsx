@@ -27,14 +27,24 @@ export function MemePreview({ settings }: MemePreviewProps) {
           }}
         >
           <div className="mx-auto justify-self-center">
-            <Icon
-              icon={settings.source}
-              // FIXME it not works.
-              // className={`size-[${settings.icon.size}px]`}
-              style={{
-                fontSize: `${settings.icon.size}px`,
-              }}
-            />
+            {settings.source.startsWith("blob:") ? (
+              <img
+                src={settings.source}
+                alt="uploaded icon"
+                style={{
+                  width: `${settings.icon.size}px`,
+                  height: `${settings.icon.size}px`,
+                  objectFit: "contain",
+                }}
+              />
+            ) : (
+              <Icon
+                icon={settings.source}
+                style={{
+                  fontSize: `${settings.icon.size}px`,
+                }}
+              />
+            )}
           </div>
           <span
             className={clsx(
