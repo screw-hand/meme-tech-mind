@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Icon } from "@iconify/react"
 import clsx from "clsx"
 
@@ -27,14 +28,22 @@ export function MemePreview({ settings }: MemePreviewProps) {
           }}
         >
           <div className="mx-auto justify-self-center">
-            <Icon
-              icon={settings.source}
-              // FIXME it not works.
-              // className={`size-[${settings.icon.size}px]`}
-              style={{
-                fontSize: `${settings.icon.size}px`,
-              }}
-            />
+            {settings.source.startsWith("blob:") ? (
+              <Image
+                src={settings.source}
+                alt="uploaded icon"
+                width={settings.icon.size}
+                height={settings.icon.size}
+                className="object-contain"
+              />
+            ) : (
+              <Icon
+                icon={settings.source}
+                style={{
+                  fontSize: `${settings.icon.size}px`,
+                }}
+              />
+            )}
           </div>
           <span
             className={clsx(
