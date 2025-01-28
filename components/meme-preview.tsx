@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Icon } from "@iconify/react"
 import clsx from "clsx"
 
@@ -28,14 +29,12 @@ export function MemePreview({ settings }: MemePreviewProps) {
         >
           <div className="mx-auto justify-self-center">
             {settings.source.startsWith("blob:") ? (
-              <img
+              <Image
                 src={settings.source}
                 alt="uploaded icon"
-                style={{
-                  width: `${settings.icon.size}px`,
-                  height: `${settings.icon.size}px`,
-                  objectFit: "contain",
-                }}
+                width={settings.icon.size}
+                height={settings.icon.size}
+                className="object-contain"
               />
             ) : (
               <Icon
