@@ -25,9 +25,6 @@ export function MemeGenerator() {
   }
 
   const handleOperatorMeme = (operator: MemeOperatorType) => {
-    console.log("operator", operator)
-    console.log("Generating meme with settings:", settings)
-
     const memeContentDom = document.querySelector(
       "#meme-content"
     ) as HTMLElement

@@ -73,6 +73,9 @@ devDependencies:
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.20(postcss@8.5.1)
+  dom-to-image-more:
+    specifier: ^3.5.0
+    version: 3.5.0
   eslint:
     specifier: ^8.44.0
     version: 8.57.1
@@ -1378,6 +1381,10 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: true
+
+  /dom-to-image-more@3.5.0:
+    resolution: {integrity: sha512-VF/vwfHsPNMHJb5W/5sAmco3UIlEWSEFLppInQwqwN4joUvBULDwE3CqVcUDkUWleke/nZ5KwIVSrrFlGw7WPA==}
     dev: true
 
   /dunder-proto@1.0.1:
