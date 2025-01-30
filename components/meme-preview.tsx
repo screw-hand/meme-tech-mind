@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import droplet from "@/public/images/droplet.webp"
+import droplet from "@/public/images/droplet.png"
 import { Icon } from "@iconify/react"
 import clsx from "clsx"
 
