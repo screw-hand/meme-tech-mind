@@ -52,6 +52,7 @@ navigator.clipboard.write,开发环境`http://192.168.31.51:3000/`不可以使�
 
 `navigator.clipboard.write` 在开发环境 `http://192.168.31.51:3000/` 不可用，而在线上环境 `https://HOST.com` 正常，通常是因为浏览器的安全策略限制了非安全上下文（如 HTTP）对剪贴板的访问。
 
+````
 ### 原因分析
 1. **安全上下文限制**：
    - `navigator.clipboard` API 要求页面在安全上下文中运行（即 HTTPS 或 `localhost`）。
@@ -106,4 +107,7 @@ navigator.clipboard.write,开发环境`http://192.168.31.51:3000/`不可以使�
 - 开发环境使用 `localhost` 或 HTTPS 来确保 `navigator.clipboard` 可用。
 - 如果无法使用 HTTPS，可以使用 `document.execCommand('copy')` 作为备选方案。
 - 始终检查 `navigator.clipboard` 的支持情况，避免在非安全上下文中直接调用。
+````
+## emoji url
 
+💧 - https://www.emojiall.com/images/240/apple/1f4a7.png
