@@ -53,8 +53,8 @@ export function MemePreview({ settings }: MemePreviewProps) {
             width={settings.emoji.size}
             height={settings.emoji.size}
             style={{
-              right: `${settings.emoji.x}px`,
-              top: `${settings.emoji.y}px`,
+              left: `${settings.emoji.x}px`,
+              bottom: `${settings.emoji.y}px`,
             }}
           />
           <p

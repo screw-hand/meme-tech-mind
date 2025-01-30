@@ -10,8 +10,8 @@ export const DefaultMeMeSettings: MemeSettingsType = {
   },
   emoji: {
     size: 48,
-    x: 15,
-    y: 20,
+    x: 110,
+    y: 135,
   },
   background: {
     size: 180,
