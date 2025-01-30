@@ -10,14 +10,22 @@ export function SettingBar({
   children?: React.ReactNode
 }) {
   return (
-    <div className="setting-bar">
-      <Label className="item-center flex gap-2">
-        <p className="flex-none py-[6px] text-sm font-medium">{label}</p>
-        <div className="flex flex-auto flex-col justify-center gap-2">
+    <div className="setting-bar grid grid-cols-[auto,1fr] gap-2">
+      <div className="setting-bar-label setting-bar-left">
+        <Label>
+          <p className="setting-bar-label-text py-[6px] text-sm font-medium">
+            {label}
+          </p>
+        </Label>
+      </div>
+      <div className="setting-bar-right flex flex-col gap-2">
+        <div className="setting-bar-content flex flex-col justify-center gap-2">
           {children}
-          {other && <div className="text-xs text-gray-500">{other}</div>}
         </div>
-      </Label>
+        {other && (
+          <div className="setting-bar-other text-xs text-gray-500">{other}</div>
+        )}
+      </div>
     </div>
   )
 }
