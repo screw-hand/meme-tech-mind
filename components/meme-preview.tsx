@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import droplet from "@/public/images/droplet.webp"
 import { Icon } from "@iconify/react"
 import clsx from "clsx"
 
@@ -45,23 +46,17 @@ export function MemePreview({ settings }: MemePreviewProps) {
               />
             )}
           </div>
-          <span
-            className={clsx(
-              "absolute"
-              // FIXME it not works.
-              // `text-[${settings.emoji.size}px]`,
-              // `right-[${settings.emoji.x}px]`,
-              // `top-[${settings.emoji.y}px]`
-            )}
-            // FIXME html2canvas，会让emoji错位
+          <Image
+            className={clsx("absolute")}
+            src={droplet}
+            alt="💧"
+            width={settings.emoji.size}
+            height={settings.emoji.size}
             style={{
-              fontSize: `${settings.emoji.size}px`,
-              right: `${settings.emoji.x}px`,
-              top: `${settings.emoji.y}px`,
+              left: `${settings.emoji.x}px`,
+              bottom: `${settings.emoji.y}px`,
             }}
-          >
-            💧
-          </span>
+          />
           <p
             style={{
               width: `${settings.text.width}`,
