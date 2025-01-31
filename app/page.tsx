@@ -1,11 +1,20 @@
 "use client"
 
+import dynamic from "next/dynamic"
+
 import { Toaster } from "@/components/ui/sonner"
-import { MemeGenerator } from "@/components/meme-generator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 import pkg from "../package.json"
+
+const MemeGenerator = dynamic(
+  () => import("@/components/meme-generator").then((mod) => mod.MemeGenerator),
+  {
+    ssr: false,
+    loading: () => <div>Loading...</div>,
+  }
+)
 
 export default function IndexPage() {
   return (
