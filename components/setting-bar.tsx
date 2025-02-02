@@ -18,12 +18,14 @@ export function SettingBar({
           </p>
         </Label>
       </div>
-      <div className="setting-bar-right flex flex-col gap-2">
-        <div className="setting-bar-content flex flex-col justify-center gap-2">
+      <div className="setting-bar-right flex flex-col">
+        <div className="setting-bar-content flex flex-auto flex-col justify-center">
           {children}
         </div>
         {other && (
-          <div className="setting-bar-other text-xs text-gray-500">{other}</div>
+          <div className="setting-bar-other mt-[2px] text-xs text-gray-500">
+            {other}
+          </div>
         )}
       </div>
     </div>
