@@ -12,25 +12,29 @@ export const copyMemeToClipboard = async (dom: HTMLElement | null) => {
     return
   }
 
-  // try {
-  //   const canvas = await html2canvas(dom)
-  //   const blob = await new Promise<Blob | null>((resolve) => {
-  //     canvas.toBlob(resolve, "image/png")
-  //   })
-  //   if (blob) {
-  //     await navigator.clipboard.write([
-  //       new ClipboardItem({
-  //         "image/png": blob,
-  //       }),
-  //     ])
-  //   }
-  //   toast.success("复制成功")
-  // } catch (e) {
-  //   console.error("复制失败", e)
-  //   toast.error("复制失败", {
-  //     description: e + "",
-  //   })
-  // }
+  try {
+    const stage = dom.querySelector("canvas")
+    if (!stage) {
+      throw new Error("找不到canvas元素")
+    }
+
+    const dataUrl = stage.toDataURL()
+    const response = await fetch(dataUrl)
+    const blob = await response.blob()
+
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        "image/png": blob,
+      }),
+    ])
+
+    toast.success("复制成功")
+  } catch (e) {
+    console.error("复制失败", e)
+    toast.error("复制失败", {
+      description: e + "",
+    })
+  }
 }
 
 /**
