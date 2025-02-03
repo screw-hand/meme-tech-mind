@@ -21,7 +21,6 @@ export function MemeSearchIcon({
     const result = ICON_LIST.filter((x) => x.includes(name)).map(
       (icon) => `${ICONIFY_TYPE_PREFIX}${icon}`
     )
-    console.log("getIconifyIconName11", result)
     return result
   }
 
