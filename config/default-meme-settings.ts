@@ -14,11 +14,11 @@ export const DefaultMeMeSettings: MemeSettingsType = {
     y: 135,
   },
   background: {
-    size: 180,
+    width: 180,
+    height: 180,
     color: "#ffffff",
     borderRadius: 30,
-    paddingX: 10,
-    paddingY: 10,
+    topPadding: 10,
   },
   text: {
     width: 180,
