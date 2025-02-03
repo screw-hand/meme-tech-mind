@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 import { Image as KonvaImage } from "react-konva"
 import useImage from "use-image"
@@ -14,12 +14,13 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [image] = useImage(imageUrl)
 
-  useEffect(() => {
-    if (icon.startsWith("blob:")) {
-      setImageUrl(icon)
-      return
+  const clearImageUrl = useCallback(() => {
+    if (imageUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(imageUrl)
     }
+  }, [imageUrl])
 
+  const convertIconToDataUrl = (icon: string, size: number) => {
     // 如果是 Iconify 图标，将其转换为 SVG，然后转为 data URL
     const iconSize = size * 2 // 使用2倍大小以确保清晰度
 
@@ -52,13 +53,15 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
       reactRoot.unmount()
       document.body.removeChild(root)
     }, 100)
+  }
+
+  useEffect(() => {
+    convertIconToDataUrl(icon, size)
 
     return () => {
-      if (imageUrl.startsWith("blob:")) {
-        URL.revokeObjectURL(imageUrl)
-      }
+      clearImageUrl()
     }
-  }, [icon, size])
+  }, [icon, size, clearImageUrl])
 
   if (!image) return null
 
