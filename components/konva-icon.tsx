@@ -15,13 +15,15 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
   const [image] = useImage(imageUrl)
 
   const generateDataUrl = useCallback(async (icon: string, size: number) => {
-    const iconData = await loadIcon(icon)
-    if (!iconData) {
-      console.error(`Icon ${icon} not found`)
-      return
-    }
+    const isUploadImage = icon.startsWith("blob:")
+    if (!isUploadImage) {
+      const iconData = await loadIcon(icon)
+      if (!iconData) {
+        console.error(`Icon ${icon} not found`)
+        return
+      }
 
-    const svgElement = `
+      const svgElement = `
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="${iconData.width}"
@@ -32,8 +34,11 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
       </svg>
     `
 
-    const dataUrl = `data:image/svg+xml;base64,${btoa(svgElement)}`
-    setImageUrl(dataUrl)
+      const dataUrl = `data:image/svg+xml;base64,${btoa(svgElement)}`
+      setImageUrl(dataUrl)
+    } else {
+      setImageUrl(icon)
+    }
   }, [])
 
   const clearImageUrl = useCallback(() => {
