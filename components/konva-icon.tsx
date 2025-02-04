@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { getIcon } from "@iconify/react"
+import { loadIcon } from "@iconify/react"
 import { Image as KonvaImage } from "react-konva"
 import useImage from "use-image"
 
@@ -14,8 +14,8 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [image] = useImage(imageUrl)
 
-  const generateDataUrl = useCallback((icon: string, size: number) => {
-    const iconData = getIcon(icon)
+  const generateDataUrl = useCallback(async (icon: string, size: number) => {
+    const iconData = await loadIcon(icon)
     if (!iconData) {
       console.error(`Icon ${icon} not found`)
       return
