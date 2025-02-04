@@ -56,9 +56,9 @@ export function MemeGenerator() {
         </div>
         {/* meme 操作 */}
         <div className="my-4">
-          <MemeOperations
+          {/* <MemeOperations
             onGenerateMeme={(operator) => handleOperatorMeme(operator)}
-          />
+          /> */}
         </div>
       </div>
 

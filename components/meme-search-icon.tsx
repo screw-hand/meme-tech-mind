@@ -90,11 +90,10 @@ export function MemeSearchIcon({
             accept="image/*"
             onChange={handleUploadIcon}
           />
-          <Icon icon="uil:image-upload" className="h-20 w-full" />
+          {/* <Icon icon="uil:image-upload" className="h-20 w-full" /> */}
           <p>上传icon</p>
         </label>
-
-        {displayedIcons.map((icon) => {
+        {/* {displayedIcons.map((icon) => {
           return (
             <Icon
               key={icon}
@@ -103,7 +102,7 @@ export function MemeSearchIcon({
               className="size-20"
             />
           )
-        })}
+        })} */}
       </div>
       {iconList.length === 0 ? (
         <p className=" text-center text-red-500">搜不到，换个词吧。</p>
