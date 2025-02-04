@@ -106,7 +106,7 @@ export function MemeSettings({
         <SettingBar label={<span>表情位置</span>}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="flex-none">X:</span>
+              <span className="flex-none">X</span>
               <Slider
                 value={[settings.emoji.x]}
                 min={-150}
@@ -120,7 +120,7 @@ export function MemeSettings({
                 }
               />
               <span className="flex-none">{settings.emoji.x}</span>
-              <span className="flex-none">Y:</span>
+              <span className="flex-none">Y</span>
               <Slider
                 value={[settings.emoji.y]}
                 min={-500}
@@ -141,10 +141,11 @@ export function MemeSettings({
       {/* 背景设置 */}
       <section className="flex flex-col gap-3">
         <h3 className="text-center text-lg font-medium">背景</h3>
-        <SettingBar label={<span>背景大小</span>}>
+        <SettingBar label={<span>背景</span>}>
           <div className="flex items-center gap-2">
+            <span className="flex-none">宽</span>
             <Slider
-              value={[settings.background.size]}
+              value={[settings.background.width]}
               max={maxWidth}
               step={1}
               onValueChange={(value) =>
@@ -152,85 +153,47 @@ export function MemeSettings({
                   ...settings,
                   background: {
                     ...settings.background,
-                    size: value[0],
+                    width: value[0],
                   },
                 })
               }
             />
-            <span className="flex-none">{settings.background.size}</span>
-          </div>
-        </SettingBar>
-        <SettingBar label={<span>背景颜色</span>}>
-          <Input
-            type="color"
-            name="bg-color"
-            className="h-8 w-full"
-            value={settings.background.color}
-            onChange={(e) =>
-              onSettingsChange({
-                ...settings,
-                background: { ...settings.background, color: e.target.value },
-              })
-            }
-          />
-        </SettingBar>
-        <SettingBar label={<span>背景圆角</span>}>
-          <div className="flex items-center gap-2">
+            <span className="flex-none">{settings.background.width}</span>
+            <span className="flex-none">高</span>
             <Slider
-              value={[settings.background.borderRadius]}
-              max={250}
+              value={[settings.background.height]}
+              max={maxWidth}
               step={1}
               onValueChange={(value) =>
                 onSettingsChange({
                   ...settings,
                   background: {
                     ...settings.background,
-                    borderRadius: value[0],
+                    height: value[0],
                   },
                 })
               }
             />
-            <span className="flex-none">
-              {settings.background.borderRadius}
-            </span>
+            <span className="flex-none">{settings.background.height}</span>
           </div>
         </SettingBar>
-        <SettingBar label={<span>背景内边距</span>}>
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <span className="w-8 flex-none">X:</span>
-              <Slider
-                value={[settings.background.paddingX]}
-                max={100}
-                step={1}
-                onValueChange={(value) =>
-                  onSettingsChange({
-                    ...settings,
-                    background: {
-                      ...settings.background,
-                      paddingX: value[0],
-                    },
-                  })
-                }
-              />
-              <span className="flex-none">{settings.background.paddingX}</span>
-              <span className="w-8 flex-none">Y:</span>
-              <Slider
-                value={[settings.background.paddingY]}
-                max={100}
-                step={1}
-                onValueChange={(value) =>
-                  onSettingsChange({
-                    ...settings,
-                    background: {
-                      ...settings.background,
-                      paddingY: value[0],
-                    },
-                  })
-                }
-              />
-              <span className="flex-none">{settings.background.paddingY}</span>
-            </div>
+        <SettingBar label={<span>顶部距离</span>}>
+          <div className="flex items-center gap-2">
+            <Slider
+              value={[settings.background.topPadding]}
+              max={100}
+              step={1}
+              onValueChange={(value) =>
+                onSettingsChange({
+                  ...settings,
+                  background: {
+                    ...settings.background,
+                    topPadding: value[0],
+                  },
+                })
+              }
+            />
+            <span className="flex-none">{settings.background.topPadding}</span>
           </div>
         </SettingBar>
       </section>

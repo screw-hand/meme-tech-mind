@@ -1,9 +1,9 @@
 {
   "name": "meme-tech-mind",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

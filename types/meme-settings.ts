@@ -17,11 +17,11 @@ export interface MemeSettingsType {
     y: number
   }
   background: {
-    size: number
+    width: number
+    height: number
     color: string
     borderRadius: number
-    paddingX: number
-    paddingY: number
+    topPadding: number
   }
   text: {
     width: number

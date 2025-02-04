@@ -22,14 +22,14 @@ export function MemePreview({ settings }: MemePreviewProps) {
         {/* meme content */}
         <Stage
           id="meme-content"
-          width={settings.background.size}
-          height={settings.background.size}
+          width={settings.background.width}
+          height={settings.background.height}
         >
           <Layer>
             {/* Background */}
             <Rect
-              width={settings.background.size}
-              height={settings.background.size}
+              width={settings.background.width}
+              height={settings.background.height}
               fill={settings.background.color}
               cornerRadius={settings.background.borderRadius}
             />
@@ -38,8 +38,8 @@ export function MemePreview({ settings }: MemePreviewProps) {
             <KonvaIcon
               icon={settings.source}
               size={settings.icon.size}
-              x={(settings.background.size - settings.icon.size) / 2}
-              y={settings.background.paddingY}
+              x={(settings.background.width - settings.icon.size) / 2}
+              y={settings.background.topPadding}
             />
 
             {/* Droplet */}
@@ -49,7 +49,7 @@ export function MemePreview({ settings }: MemePreviewProps) {
               height={settings.emoji.size}
               x={settings.emoji.x}
               y={
-                settings.background.size -
+                settings.background.height -
                 settings.emoji.y -
                 settings.emoji.size
               }
@@ -63,9 +63,9 @@ export function MemePreview({ settings }: MemePreviewProps) {
               fontFamily={settings.text.fontFamily}
               fontSize={settings.text.fontSize}
               align="center"
-              x={(settings.background.size - Number(settings.text.width)) / 2}
+              x={(settings.background.width - Number(settings.text.width)) / 2}
               y={
-                settings.background.paddingY +
+                settings.background.topPadding +
                 settings.icon.size +
                 settings.text.marginTop
               }
