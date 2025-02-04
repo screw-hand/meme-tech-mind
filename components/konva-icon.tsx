@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { Icon } from "@iconify/react"
+import { getIcon } from "@iconify/react"
 import { Image as KonvaImage } from "react-konva"
 import useImage from "use-image"
 
@@ -14,54 +14,41 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
   const [imageUrl, setImageUrl] = useState<string>("")
   const [image] = useImage(imageUrl)
 
+  const generateDataUrl = useCallback((icon: string, size: number) => {
+    const iconData = getIcon(icon)
+    if (!iconData) {
+      console.error(`Icon ${icon} not found`)
+      return
+    }
+
+    const svgElement = `
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="${iconData.width}"
+        height="${iconData.height}"
+        viewBox="${iconData.left} ${iconData.top} ${iconData.width} ${iconData.height}"
+      >
+        ${iconData.body}
+      </svg>
+    `
+
+    const dataUrl = `data:image/svg+xml;base64,${btoa(svgElement)}`
+    setImageUrl(dataUrl)
+  }, [])
+
   const clearImageUrl = useCallback(() => {
     if (imageUrl.startsWith("blob:")) {
       URL.revokeObjectURL(imageUrl)
     }
   }, [imageUrl])
 
-  const convertIconToDataUrl = (icon: string, size: number) => {
-    // 如果是 Iconify 图标，将其转换为 SVG，然后转为 data URL
-    const iconSize = size * 2 // 使用2倍大小以确保清晰度
-
-    // 渲染图标到 div
-    const iconComponent = (
-      <Icon icon={icon} width={iconSize} height={iconSize} />
-    )
-
-    // 使用 React 渲染到 div
-    const root = document.createElement("div")
-    root.style.position = "absolute"
-    root.style.pointerEvents = "none"
-    root.style.opacity = "0"
-    document.body.appendChild(root)
-
-    // @ts-ignore - 忽略 createRoot 类型错误
-    const reactRoot = require("react-dom/client").createRoot(root)
-    reactRoot.render(iconComponent)
-
-    // 等待图标加载完成
-    setTimeout(() => {
-      const svgElement = root.querySelector("svg")
-      if (svgElement) {
-        // 将 SVG 转换为 data URL
-        const svgString = new XMLSerializer().serializeToString(svgElement)
-        const dataUrl = `data:image/svg+xml;base64,${btoa(svgString)}`
-        setImageUrl(dataUrl)
-      }
-      // 清理
-      reactRoot.unmount()
-      document.body.removeChild(root)
-    }, 5000)
-  }
-
   useEffect(() => {
-    convertIconToDataUrl(icon, size)
+    generateDataUrl(icon, size)
 
     return () => {
       clearImageUrl()
     }
-  }, [icon, size, clearImageUrl])
+  }, [icon, size, generateDataUrl, clearImageUrl])
 
   if (!image) return null
 
