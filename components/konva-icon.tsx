@@ -52,7 +52,7 @@ export function KonvaIcon({ icon, size, x, y }: KonvaIconProps) {
       // 清理
       reactRoot.unmount()
       document.body.removeChild(root)
-    }, 100)
+    }, 5000)
   }
 
   useEffect(() => {
