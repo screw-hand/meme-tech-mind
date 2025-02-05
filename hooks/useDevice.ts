@@ -1,9 +1,7 @@
-import { useEventListener } from "@vueuse/core"
-import { onMounted, ref } from "vue"
+import { useEffect, useState } from "react"
 
 export function useDevice() {
-  const isRealPc = ref(true)
-  const mediaQueryList = window.matchMedia("(any-pointer: fine)")
+  const [isRealPc, setIsRealPc] = useState(true)
 
   const checkRealPc = () => {
     // 检查指针类型（检测设备是否支持精确输入：鼠标等）
@@ -25,14 +23,21 @@ export function useDevice() {
     return hasFinePointer && !isMobilePlatform && !isMobileClient
   }
 
-  useEventListener(mediaQueryList, "change", () => {
-    isRealPc.value = checkRealPc()
-  })
+  useEffect(() => {
+    // 初始化值
+    setIsRealPc(checkRealPc())
 
-  // 初始化值
-  onMounted(() => {
-    isRealPc.value = checkRealPc()
-  })
+    // 设置媒体查询监听器
+    const mediaQueryList = window.matchMedia("(any-pointer: fine)")
+    const handleChange = () => setIsRealPc(checkRealPc())
+
+    mediaQueryList.addEventListener("change", handleChange)
+
+    // 清理函数
+    return () => {
+      mediaQueryList.removeEventListener("change", handleChange)
+    }
+  }, [])
 
   return {
     isRealPc,
