@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Ref } from "vue"
 
 export function useDevice() {
   const [isRealPc, setIsRealPc] = useState(true)
