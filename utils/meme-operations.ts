@@ -77,25 +77,32 @@ export const shareMeme = async (dom: HTMLElement | null) => {
   if (!dom) {
     return
   }
-  // try {
-  //   const canvas = await html2canvas(dom)
-  //   const blob = await new Promise<Blob | null>((resolve) => {
-  //     canvas.toBlob(resolve, "image/png")
-  //   })
-  //   if (blob) {
-  //     const file = new File([blob], "meme.png", { type: "image/png" })
-  //     await navigator.share({
-  //       files: [file],
-  //       title: "分享图片",
-  //     })
-  //     return
-  //   }
-  // } catch (e) {
-  //   console.error("分享失败", e)
-  //   toast.error("分享失败", {
-  //     description: e + "",
-  //   })
-  // }
+
+  try {
+    const stage = dom.querySelector("canvas")
+    if (!stage) {
+      throw new Error("找不到canvas元素")
+    }
+
+    const dataUrl = stage.toDataURL()
+    const response = await fetch(dataUrl)
+    const blob = await response.blob()
+
+    const file = new File([blob], "meme.png", { type: "image/png" })
+    await navigator
+      .share({
+        files: [file],
+        title: "分享图片",
+      })
+      .catch(() => {
+        return
+      })
+  } catch (e) {
+    console.error("分享失败", e)
+    toast.error("分享失败", {
+      description: e + "",
+    })
+  }
 }
 
 /**
