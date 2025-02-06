@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react"
 
 import { MemeOperatorType } from "@/types/meme-operator"
+import { useDevice } from "@/hooks/useDevice"
 import { Button } from "@/components/ui/button"
 
 interface MemeOperationsProps {
@@ -10,17 +11,31 @@ interface MemeOperationsProps {
 }
 
 export function MemeOperations({ onGenerateMeme }: MemeOperationsProps) {
+  const { isRealPc } = useDevice()
+
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <Button
-        variant="outline"
-        size="sm"
-        className="gap-2 text-gray-600 hover:text-gray-900"
-        onClick={() => onGenerateMeme(MemeOperatorType.COPY)}
-      >
-        <Icon icon="uil:copy" className="size-4" />
-        复制
-      </Button>
+    <div className="grid grid-cols-2 gap-4">
+      {isRealPc ? (
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2 text-gray-600 hover:text-gray-900"
+          onClick={() => onGenerateMeme(MemeOperatorType.COPY)}
+        >
+          <Icon icon="uil:copy" className="size-4" />
+          复制
+        </Button>
+      ) : (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="gap-2 bg-green-500 text-white hover:bg-green-600"
+          onClick={() => onGenerateMeme(MemeOperatorType.SHARE)}
+        >
+          <Icon icon="uil:share" className="size-4" />
+          分享
+        </Button>
+      )}
       <Button
         variant="default"
         size="sm"
@@ -34,15 +49,6 @@ export function MemeOperations({ onGenerateMeme }: MemeOperationsProps) {
         <Icon icon="uil:link" />
         链接
       </Button> */}
-      <Button
-        variant="secondary"
-        size="sm"
-        className="gap-2 bg-green-500 text-white hover:bg-green-600"
-        onClick={() => onGenerateMeme(MemeOperatorType.SHARE)}
-      >
-        <Icon icon="uil:share" className="size-4" />
-        分享
-      </Button>
     </div>
   )
 }
