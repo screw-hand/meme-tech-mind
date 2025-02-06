@@ -94,8 +94,11 @@ export const shareMeme = async (dom: HTMLElement | null) => {
         files: [file],
         title: "分享图片",
       })
-      .catch(() => {
-        return
+      .catch((e) => {
+        if (e.message === "Share canceled") {
+          return
+        }
+        throw e
       })
   } catch (e) {
     console.error("分享失败", e)
