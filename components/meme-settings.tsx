@@ -200,7 +200,7 @@ export function MemeSettings({
       {/* 文字设置 */}
       <section className="flex flex-col gap-3">
         <h3 className="text-center text-lg font-medium">文字</h3>
-        <SettingBar label={<span>文本宽度</span>}>
+        <SettingBar label={<span>文字宽度</span>}>
           <div className="flex items-center gap-2">
             <Slider
               value={[settings.text.width]}
