@@ -49,24 +49,32 @@ export const downloadMeme = async (
   if (!dom) {
     return
   }
-  // try {
-  //   const canvas = await html2canvas(dom)
-  //   const blob = await new Promise<Blob | null>((resolve) => {
-  //     canvas.toBlob(resolve, "image/png")
-  //   })
-  //   if (blob) {
-  //     const url = URL.createObjectURL(blob)
-  //     const link = document.createElement("a")
-  //     link.href = url
-  //     link.download = fileName
-  //     document.body.appendChild(link)
-  //     link.click()
-  //     document.body.removeChild(link)
-  //     URL.revokeObjectURL(url)
-  //   }
-  // } catch (e) {
-  //   console.error("下载失败", e)
-  // }
+
+  try {
+    const stage = dom.querySelector("canvas")
+    if (!stage) {
+      throw new Error("找不到canvas元素")
+    }
+
+    const dataUrl = stage.toDataURL()
+    const response = await fetch(dataUrl)
+    const blob = await response.blob()
+
+    const file = new File([blob], fileName, { type: "image/png" })
+    const url = URL.createObjectURL(file)
+    const link = document.createElement("a")
+    link.href = url
+    link.download = fileName
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  } catch (e) {
+    console.error("下载失败", e)
+    toast.error("下载失败", {
+      description: e + "",
+    })
+  }
 }
 
 /**
