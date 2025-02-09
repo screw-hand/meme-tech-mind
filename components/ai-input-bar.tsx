@@ -77,7 +77,7 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
         ? (settings.ai.prompt[name] as (settings: MemeSettingsType) => string)(
             settings
           )
-        : settings.ai.prompt[name]
+        : (settings.ai.prompt[name] as string)
 
     setInput(prompt)
     // eslint-disable-next-line react-hooks/exhaustive-deps
