@@ -11,12 +11,10 @@ export const DefaultMeMeSettings: MemeSettingsType = {
     apiKey: window.localStorage.getItem("apiKey") || "",
     model: window.localStorage.getItem("model") || "deepseek-coder",
     prompt: {
-      target: (settings: MemeSettingsType) => `
-        ${settings.source},会攻击哪个对象？极简回复！！
-      `,
-      specialEffect: (settings: MemeSettingsType) => `
-        ${settings.source}会如何嘲讽${settings.target}？极简回复！！
-      `,
+      target: (settings: MemeSettingsType) =>
+        `${settings.source},会攻击哪个对象？极简回复！！`,
+      specialEffect: (settings: MemeSettingsType) =>
+        `${settings.source}会如何嘲讽${settings.target}？极简回复！！`,
     },
   },
   icon: {
