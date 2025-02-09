@@ -27,7 +27,7 @@ interface AiBarProps {
 }
 
 export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
-  const { messages, isLoading, setInput, handleSubmit } = useChat({
+  const { isLoading, setInput, handleInputChange, append } = useChat({
     api: "/api/chat",
     headers: {
       "Content-Type": "application/json",
@@ -49,6 +49,24 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
       })
     },
   })
+
+  const handleClick = async () => {
+    const prompt =
+      typeof settings.ai.prompt[name] === "function"
+        ? settings.ai.prompt[name](settings)
+        : settings.ai.prompt[name]
+
+    await append({
+      role: "user",
+      content: prompt,
+      parts: [{ type: "text", text: prompt }],
+    })
+
+    // 同步更新输入框
+    handleInputChange({
+      target: { value: prompt },
+    } as React.ChangeEvent<HTMLInputElement>)
+  }
 
   const handleUpdatePrompt = useCallback(() => {
     console.log("handleUpdatePrompt", settings.ai.prompt[name])
@@ -80,7 +98,7 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
         variant="outline"
         className="h-8 px-2 py-0"
         disabled={isLoading}
-        onClick={handleSubmit}
+        onClick={() => handleClick()}
       >
         {isLoading ? (
           <Loader2 className="animate-spin" />
