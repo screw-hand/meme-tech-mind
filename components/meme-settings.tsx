@@ -55,7 +55,7 @@ export function MemeSettings({
           other={<span>api key只存储在本地，服务器并不收集，请放心。</span>}
         >
           <Input
-            type="text"
+            type="password"
             name="api key"
             value={settings.ai.apiKey}
             onChange={(e) =>
