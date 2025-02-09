@@ -4,11 +4,10 @@ import { useEffect, useState } from "react"
 
 import { MemeSettingsType } from "@/types/meme-settings"
 import { Input } from "@/components/ui/input"
+import { Slider } from "@/components/ui/slider"
+import { AiBar } from "@/components/ai-input-bar"
 import { MemeSearchIcon } from "@/components/meme-search-icon"
 import { SettingBar } from "@/components/setting-bar"
-
-import { AiBar } from "./ai-input-bar"
-import { Slider } from "./ui/slider"
 
 interface MemeSettingsProps {
   settings: MemeSettingsType
@@ -106,14 +105,10 @@ export function MemeSettings({
           />
         </SettingBar>
         <SettingBar label="目标">
-          <Input
-            type="text"
+          <AiBar
             name="target"
-            className="h-8 px-2 text-sm"
-            value={settings.target}
-            onChange={(e) =>
-              onSettingsChange({ ...settings, target: e.target.value })
-            }
+            settings={settings}
+            onSettingsChange={onSettingsChange}
           />
         </SettingBar>
       </section>
