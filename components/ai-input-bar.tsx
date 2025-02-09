@@ -53,8 +53,10 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
   const handleClick = async () => {
     const prompt =
       typeof settings.ai.prompt[name] === "function"
-        ? settings.ai.prompt[name](settings)
-        : settings.ai.prompt[name]
+        ? (settings.ai.prompt[name] as (settings: MemeSettingsType) => string)(
+            settings
+          )
+        : (settings.ai.prompt[name] as string)
 
     await append({
       role: "user",
@@ -72,8 +74,10 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
     console.log("handleUpdatePrompt", settings.ai.prompt[name])
     const prompt =
       typeof settings.ai.prompt[name] === "function"
-        ? settings.ai.prompt[name](settings)
-        : settings.ai.prompt[name]
+        ? (settings.ai.prompt[name] as (settings: MemeSettingsType) => string)(
+            settings
+          )
+        : (settings.ai.prompt[name] as string)
 
     setInput(prompt)
     // eslint-disable-next-line react-hooks/exhaustive-deps
