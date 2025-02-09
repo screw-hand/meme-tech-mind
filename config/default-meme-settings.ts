@@ -12,7 +12,7 @@ export const DefaultMeMeSettings: MemeSettingsType = {
     model: window.localStorage.getItem("model") || "deepseek-coder",
     prompt: {
       target: (settings: MemeSettingsType) => `
-        请作为数字产品分析师，为输入的软件/互联网产品或iconify图标推荐最具代表性的竞争/替代方案。遵循以下规则：
+        请作为数字产品分析师，为输入的软件/互联网产品推荐最具代表性的竞争/替代方案。遵循以下规则：
         推荐原则：
         1. 核心功能对标：推荐与输入产品解决相同用户需求的产品
         2. 市场定位匹配：优先推荐同级别/同类型竞品
@@ -34,12 +34,8 @@ export const DefaultMeMeSettings: MemeSettingsType = {
         4. 不允许使用iconify命名规范
         3. 禁止解释说明
 
-        示例：
-        输入：skill-icons:react-dark
-        输出：Vue
-
         当前任务：
-          输入：${settings.source}
+          输入：${settings.searchKey}
           输出：
       `,
       specialEffect: (settings: MemeSettingsType) =>
