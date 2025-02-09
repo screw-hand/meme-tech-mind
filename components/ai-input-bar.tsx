@@ -53,8 +53,10 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
   const handleClick = async () => {
     const prompt =
       typeof settings.ai.prompt[name] === "function"
-        ? settings.ai.prompt[name](settings)
-        : settings.ai.prompt[name]
+        ? (settings.ai.prompt[name] as (settings: MemeSettingsType) => string)(
+            settings
+          )
+        : (settings.ai.prompt[name] as string)
 
     await append({
       role: "user",
