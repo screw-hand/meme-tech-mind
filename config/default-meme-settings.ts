@@ -5,6 +5,20 @@ export const DefaultMeMeSettings: MemeSettingsType = {
   source: "skill-icons:react-dark",
   target: "vue",
   specialEffect: "",
+  ai: {
+    baseURL:
+      window.localStorage.getItem("baseURL") || "https://api.deepseek.com",
+    apiKey: window.localStorage.getItem("apiKey") || "",
+    model: window.localStorage.getItem("model") || "deepseek-coder",
+    prompt: {
+      target: (settings: MemeSettingsType) => `
+        ${settings.source},会攻击哪个对象？极简回复！！
+      `,
+      specialEffect: (settings: MemeSettingsType) => `
+        ${settings.source}会如何嘲讽${settings.target}？极简回复！！
+      `,
+    },
+  },
   icon: {
     size: 130,
   },

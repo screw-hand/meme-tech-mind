@@ -1,4 +1,13 @@
 export interface MemeSettingsType {
+  ai: {
+    baseURL: string
+    apiKey: string
+    model: string
+    prompt: {
+      target: string | ((settings: MemeSettingsType) => string)
+      specialEffect: string | ((settings: MemeSettingsType) => string)
+    }
+  }
   /* 搜索关键词 */
   searchKey: string
   /* 主角 */

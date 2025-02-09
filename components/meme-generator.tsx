@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   copyMemeLink,
   copyMemeToClipboard,
@@ -22,6 +22,7 @@ export function MemeGenerator() {
 
   const handleSettingsChange = (newSettings: MemeSettingsType) => {
     setSettings(newSettings)
+    console.log("newSettings", newSettings)
   }
 
   const handleOperatorMeme = (operator: MemeOperatorType) => {
@@ -45,6 +46,18 @@ export function MemeGenerator() {
       copyMemeLink(settings)
     }
   }
+
+  useEffect(() => {
+    if (settings.ai.baseURL !== undefined) {
+      window.localStorage.setItem("baseURL", settings.ai.baseURL)
+    }
+    if (settings.ai.apiKey !== undefined) {
+      window.localStorage.setItem("apiKey", settings.ai.apiKey)
+    }
+    if (settings.ai.model !== undefined) {
+      window.localStorage.setItem("model", settings.ai.model)
+    }
+  }, [settings])
 
   return (
     <div className="flex h-[calc(100vh-var(--header-height)-var(--top-bar-height))] flex-col">

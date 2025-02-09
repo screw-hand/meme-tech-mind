@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { MemeSearchIcon } from "@/components/meme-search-icon"
 import { SettingBar } from "@/components/setting-bar"
 
+import { AiBar } from "./ai-input-bar"
 import { Slider } from "./ui/slider"
 
 interface MemeSettingsProps {
@@ -33,6 +34,55 @@ export function MemeSettings({
   }
   return (
     <div className="meme-settings my-3 flex flex-col gap-3">
+      {/* ai */}
+      <section className="flex flex-col gap-3">
+        <h3 className="text-center text-lg font-medium">AI</h3>
+        <SettingBar label="服务">
+          <Input
+            type="text"
+            name="baseURL"
+            value={settings.ai.baseURL}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                ai: { ...settings.ai, baseURL: e.target.value },
+              })
+            }
+            className="h-8 px-2 text-sm"
+          />
+        </SettingBar>
+        <SettingBar
+          label="密钥"
+          other={<span>api key只存储在本地，服务器并不收集，请放心。</span>}
+        >
+          <Input
+            type="text"
+            name="api key"
+            value={settings.ai.apiKey}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                ai: { ...settings.ai, apiKey: e.target.value },
+              })
+            }
+            className="h-8 px-2 text-sm"
+          />
+        </SettingBar>
+        <SettingBar label="模型">
+          <Input
+            type="text"
+            name="model"
+            value={settings.ai.model}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                ai: { ...settings.ai, model: e.target.value },
+              })
+            }
+            className="h-8 px-2 text-sm"
+          />
+        </SettingBar>
+      </section>
       {/* 基本信息 */}
       <section className="flex flex-col gap-3">
         <h3 className="text-center text-lg font-medium">基本信息</h3>
