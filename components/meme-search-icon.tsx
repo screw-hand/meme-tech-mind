@@ -7,6 +7,8 @@ import ICON_LIST from "@/config/iconify-skill-icon-list"
 
 const ICONIFY_TYPE_PREFIX = "skill-icons:"
 
+const DEAULT_MAX_ICON = 12
+
 export function MemeSearchIcon({
   searchKey,
   onIconClick,
@@ -62,7 +64,9 @@ export function MemeSearchIcon({
     }
   }, [handleClearUploadIcon])
 
-  const displayedIcons = isExpanded ? iconList : iconList.slice(0, 8)
+  const displayedIcons = isExpanded
+    ? iconList
+    : iconList.slice(0, DEAULT_MAX_ICON)
 
   return (
     <div className="meme-search-icon flex flex-col gap-2">
@@ -82,33 +86,30 @@ export function MemeSearchIcon({
         </span>
         不用加）
       </p>
-      <div className="icon-list flex flex-wrap gap-3">
-        <label className="flex w-full cursor-pointer flex-col items-center justify-center border p-2 hover:bg-gray-50">
-          <input
-            type="file"
-            className="hidden"
-            accept="image/*"
-            onChange={handleUploadIcon}
+      <label className="mb-3 flex w-full cursor-pointer flex-col items-center justify-center border p-2 hover:bg-gray-50">
+        <input
+          type="file"
+          className="hidden"
+          accept="image/*"
+          onChange={handleUploadIcon}
+        />
+        <Icon icon="uil:image-upload" className="h-20 w-full" />
+        <p>上传icon</p>
+      </label>
+      <div className="icon-list grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12">
+        {displayedIcons.map((icon) => (
+          <Icon
+            key={icon}
+            icon={icon}
+            onClick={() => handleIconClick(icon)}
+            className="size-full"
           />
-          <Icon icon="uil:image-upload" className="h-20 w-full" />
-          <p>上传icon</p>
-        </label>
-
-        {displayedIcons.map((icon) => {
-          return (
-            <Icon
-              key={icon}
-              icon={icon}
-              onClick={() => handleIconClick(icon)}
-              className="size-20"
-            />
-          )
-        })}
+        ))}
       </div>
       {iconList.length === 0 ? (
         <p className=" text-center text-red-500">搜不到，换个词吧。</p>
       ) : (
-        iconList.length > 8 && (
+        iconList.length > DEAULT_MAX_ICON && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-blue-500 hover:underline"
