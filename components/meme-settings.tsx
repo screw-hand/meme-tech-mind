@@ -222,6 +222,41 @@ export function MemeSettings({
             <span className="flex-none">{settings.background.height}</span>
           </div>
         </SettingBar>
+        <SettingBar label={<span>背景颜色</span>}>
+          <Input
+            type="color"
+            name="bg-color"
+            className="h-8 w-full"
+            value={settings.background.color}
+            onChange={(e) =>
+              onSettingsChange({
+                ...settings,
+                background: { ...settings.background, color: e.target.value },
+              })
+            }
+          />
+        </SettingBar>
+        <SettingBar label={<span>背景圆角</span>}>
+          <div className="flex items-center gap-2">
+            <Slider
+              value={[settings.background.borderRadius]}
+              max={250}
+              step={1}
+              onValueChange={(value) =>
+                onSettingsChange({
+                  ...settings,
+                  background: {
+                    ...settings.background,
+                    borderRadius: value[0],
+                  },
+                })
+              }
+            />
+            <span className="flex-none">
+              {settings.background.borderRadius}
+            </span>
+          </div>
+        </SettingBar>
         <SettingBar label={<span>顶部距离</span>}>
           <div className="flex items-center gap-2">
             <Slider
