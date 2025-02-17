@@ -9,6 +9,8 @@ import { AiBar } from "@/components/ai-input-bar"
 import { MemeSearchIcon } from "@/components/meme-search-icon"
 import { SettingBar } from "@/components/setting-bar"
 
+import { Button } from "./ui/button"
+
 interface MemeSettingsProps {
   settings: MemeSettingsType
   onSettingsChange: (newSettings: MemeSettingsType) => void
@@ -20,6 +22,10 @@ export function MemeSettings({
 }: MemeSettingsProps) {
   const [maxWidth, setMaxWidth] = useState(1400 - 32) // 默认值
 
+  const handleIconClick = (icon: string) => {
+    onSettingsChange({ ...settings, source: icon })
+  }
+
   useEffect(() => {
     setMaxWidth(
       window.innerWidth > 1400
@@ -28,9 +34,6 @@ export function MemeSettings({
     )
   }, [])
 
-  const handleIconClick = (icon: string) => {
-    onSettingsChange({ ...settings, source: icon })
-  }
   return (
     <div className="meme-settings my-3 flex flex-col gap-3">
       {/* ai */}
@@ -383,6 +386,7 @@ export function MemeSettings({
           />
         </SettingBar>
       </section>
+      <Button className="reset-settigns ">重置设置</Button>
     </div>
   )
 }
