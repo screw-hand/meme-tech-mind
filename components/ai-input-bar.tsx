@@ -51,6 +51,10 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
   })
 
   const handleClick = async () => {
+    if (!settings.searchKey) {
+      toast.info("AI智能填充需要根据“搜索”内容生成，请填写“搜索”框！")
+      return
+    }
     const prompt =
       typeof settings.ai.prompt[name] === "function"
         ? (settings.ai.prompt[name] as (settings: MemeSettingsType) => string)(
@@ -64,7 +68,6 @@ export function AiBar({ name, settings, onSettingsChange }: AiBarProps) {
       parts: [{ type: "text", text: prompt }],
     })
 
-    // 同步更新输入框
     handleInputChange({
       target: { value: prompt },
     } as React.ChangeEvent<HTMLInputElement>)
