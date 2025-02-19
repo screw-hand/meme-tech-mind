@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Icon } from "@iconify/react"
 
 import { MemeSettingsType } from "@/types/meme-settings"
 import { Input } from "@/components/ui/input"
@@ -21,9 +22,14 @@ export function MemeSettings({
   onSettingsChange,
 }: MemeSettingsProps) {
   const [maxWidth, setMaxWidth] = useState(1400 - 32) // 默认值
+  const [isShowPwd, setIsShowPwd] = useState(false)
 
   const handleIconClick = (icon: string) => {
     onSettingsChange({ ...settings, source: icon })
+  }
+
+  const handleTogglePwd = () => {
+    setIsShowPwd(!isShowPwd)
   }
 
   useEffect(() => {
@@ -57,18 +63,31 @@ export function MemeSettings({
           label="密钥"
           other={<span>api key只存储在本地，服务器并不收集，请放心。</span>}
         >
-          <Input
-            type="password"
-            name="api key"
-            value={settings.ai.apiKey}
-            onChange={(e) =>
-              onSettingsChange({
-                ...settings,
-                ai: { ...settings.ai, apiKey: e.target.value },
-              })
-            }
-            className="h-8 px-2 text-sm"
-          />
+          <div className="flex w-full items-center space-x-2">
+            <Input
+              type={isShowPwd ? "text" : "password"}
+              name="api key"
+              value={settings.ai.apiKey}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  ai: { ...settings.ai, apiKey: e.target.value },
+                })
+              }
+              className="h-8 px-2 text-sm"
+            />
+
+            <Button
+              variant="outline"
+              className="h-8 px-2 py-0"
+              onClick={() => handleTogglePwd()}
+            >
+              <Icon
+                icon={isShowPwd ? "mdi:eye-off" : "mdi:eye"}
+                className="size-5 text-blue-500"
+              />
+            </Button>
+          </div>
         </SettingBar>
         <SettingBar label="模型">
           <Input
