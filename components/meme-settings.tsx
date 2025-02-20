@@ -151,7 +151,19 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.icon.size}</span>
+            <Input
+              type="number"
+              min={0}
+              max={300}
+              value={settings.icon.size}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  icon: { ...settings.icon, size: Number(e.target.value) },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar label={<span>表情大小</span>}>
@@ -167,13 +179,26 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.emoji.size}</span>
+            <Input
+              type="number"
+              min={0}
+              max={300}
+              value={settings.emoji.size}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  emoji: { ...settings.emoji, size: Number(e.target.value) },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar label={<span>表情位置</span>}>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
+            {/* X轴控制 */}
             <div className="flex items-center gap-2">
-              <span className="flex-none">X</span>
+              <span className="w-4 flex-none">X</span>
               <Slider
                 value={[settings.emoji.x]}
                 min={-150}
@@ -186,8 +211,24 @@ export function MemeSettings({
                   })
                 }
               />
-              <span className="flex-none">{settings.emoji.x}</span>
-              <span className="flex-none">Y</span>
+              <Input
+                type="number"
+                min={-150}
+                max={150}
+                value={settings.emoji.x}
+                onChange={(e) =>
+                  onSettingsChange({
+                    ...settings,
+                    emoji: { ...settings.emoji, x: Number(e.target.value) },
+                  })
+                }
+                className="h-8 w-20 px-2 text-sm"
+              />
+            </div>
+
+            {/* Y轴控制 */}
+            <div className="flex items-center gap-2">
+              <span className="w-4 flex-none">Y</span>
               <Slider
                 value={[settings.emoji.y]}
                 min={-500}
@@ -200,7 +241,19 @@ export function MemeSettings({
                   })
                 }
               />
-              <span className="flex-none">{settings.emoji.y}</span>
+              <Input
+                type="number"
+                min={-500}
+                max={500}
+                value={settings.emoji.y}
+                onChange={(e) =>
+                  onSettingsChange({
+                    ...settings,
+                    emoji: { ...settings.emoji, y: Number(e.target.value) },
+                  })
+                }
+                className="h-8 w-20 px-2 text-sm"
+              />
             </div>
           </div>
         </SettingBar>
@@ -209,39 +262,70 @@ export function MemeSettings({
       <section className="flex flex-col gap-3">
         <h3 className="text-center text-lg font-medium">背景</h3>
         <SettingBar label={<span>背景</span>}>
-          <div className="flex items-center gap-2">
-            <span className="flex-none">宽</span>
-            <Slider
-              value={[settings.background.width]}
-              max={maxWidth}
-              step={1}
-              onValueChange={(value) =>
-                onSettingsChange({
-                  ...settings,
-                  background: {
-                    ...settings.background,
-                    width: value[0],
-                  },
-                })
-              }
-            />
-            <span className="flex-none">{settings.background.width}</span>
-            <span className="flex-none">高</span>
-            <Slider
-              value={[settings.background.height]}
-              max={maxWidth}
-              step={1}
-              onValueChange={(value) =>
-                onSettingsChange({
-                  ...settings,
-                  background: {
-                    ...settings.background,
-                    height: value[0],
-                  },
-                })
-              }
-            />
-            <span className="flex-none">{settings.background.height}</span>
+          <div className="flex flex-col gap-4">
+            {/* 宽度控制 */}
+            <div className="flex items-center gap-2">
+              <span className="w-8 flex-none">宽</span>
+              <Slider
+                value={[settings.background.width]}
+                max={maxWidth}
+                step={1}
+                onValueChange={(value) =>
+                  onSettingsChange({
+                    ...settings,
+                    background: { ...settings.background, width: value[0] },
+                  })
+                }
+              />
+              <Input
+                type="number"
+                min={0}
+                max={maxWidth}
+                value={settings.background.width}
+                onChange={(e) =>
+                  onSettingsChange({
+                    ...settings,
+                    background: {
+                      ...settings.background,
+                      width: Number(e.target.value),
+                    },
+                  })
+                }
+                className="h-8 w-20 px-2 text-sm"
+              />
+            </div>
+
+            {/* 高度控制 */}
+            <div className="flex items-center gap-2">
+              <span className="w-8 flex-none">高</span>
+              <Slider
+                value={[settings.background.height]}
+                max={maxWidth}
+                step={1}
+                onValueChange={(value) =>
+                  onSettingsChange({
+                    ...settings,
+                    background: { ...settings.background, height: value[0] },
+                  })
+                }
+              />
+              <Input
+                type="number"
+                min={0}
+                max={maxWidth}
+                value={settings.background.height}
+                onChange={(e) =>
+                  onSettingsChange({
+                    ...settings,
+                    background: {
+                      ...settings.background,
+                      height: Number(e.target.value),
+                    },
+                  })
+                }
+                className="h-8 w-20 px-2 text-sm"
+              />
+            </div>
           </div>
         </SettingBar>
         <SettingBar label={<span>背景颜色</span>}>
@@ -274,9 +358,22 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">
-              {settings.background.borderRadius}
-            </span>
+            <Input
+              type="number"
+              min={0}
+              max={250}
+              value={settings.background.borderRadius}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  background: {
+                    ...settings.background,
+                    borderRadius: Number(e.target.value),
+                  },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar label={<span>顶部距离</span>}>
@@ -295,7 +392,22 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.background.topPadding}</span>
+            <Input
+              type="number"
+              min={0}
+              max={100}
+              value={settings.background.topPadding}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  background: {
+                    ...settings.background,
+                    topPadding: Number(e.target.value),
+                  },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
       </section>
@@ -315,7 +427,19 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.text.width}</span>
+            <Input
+              type="number"
+              min={0}
+              max={1000}
+              value={settings.text.width}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  text: { ...settings.text, width: Number(e.target.value) },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar label={<span>文字颜色</span>}>
@@ -345,7 +469,19 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.text.fontSize}</span>
+            <Input
+              type="number"
+              min={0}
+              max={100}
+              value={settings.text.fontSize}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  text: { ...settings.text, fontSize: Number(e.target.value) },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar label={<span>图标与文字间距</span>}>
@@ -365,7 +501,19 @@ export function MemeSettings({
                 })
               }
             />
-            <span className="flex-none">{settings.text.marginTop}</span>
+            <Input
+              type="number"
+              min={-50}
+              max={100}
+              value={settings.text.marginTop}
+              onChange={(e) =>
+                onSettingsChange({
+                  ...settings,
+                  text: { ...settings.text, marginTop: Number(e.target.value) },
+                })
+              }
+              className="h-8 w-20 px-2 text-sm"
+            />
           </div>
         </SettingBar>
         <SettingBar
