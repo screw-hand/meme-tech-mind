@@ -36,7 +36,7 @@ export default function IndexPage() {
           <MemeGenerator />
         </div>
       </main>
-      <Toaster position="top-center" closeButton />
+      <Toaster position="top-center" richColors closeButton />
     </ThemeProvider>
   )
 }
