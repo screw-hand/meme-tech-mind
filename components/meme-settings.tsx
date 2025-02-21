@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
+import { toast } from "sonner"
 
 import { MemeSettingsType } from "@/types/meme-settings"
+import { DefaultMeMeSettings } from "@/config/default-meme-settings"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { AiBar } from "@/components/ai-input-bar"
@@ -30,6 +32,25 @@ export function MemeSettings({
 
   const handleTogglePwd = () => {
     setIsShowPwd(!isShowPwd)
+  }
+
+  const handleResetSettings = () => {
+    const oldSettings = settings
+    toast.info(`重置成功`, {
+      action: {
+        label: "撤销",
+        onClick: () => {
+          onSettingsChange(oldSettings)
+          toast.success("撤销成功")
+        },
+      },
+    })
+    onSettingsChange({
+      ...DefaultMeMeSettings,
+      ai: {
+        ...settings.ai,
+      },
+    })
   }
 
   useEffect(() => {
@@ -553,7 +574,9 @@ export function MemeSettings({
           />
         </SettingBar>
       </section>
-      <Button className="reset-settigns ">重置设置</Button>
+      <Button className="reset-settings" onClick={() => handleResetSettings()}>
+        重置梗图
+      </Button>
     </div>
   )
 }
