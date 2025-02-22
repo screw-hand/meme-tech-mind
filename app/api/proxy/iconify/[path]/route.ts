@@ -1,6 +1,9 @@
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { path: string } }
+) {
   try {
-    const response = await fetch(`https://api.iconify.design/collections`)
+    const response = await fetch(`https://api.iconify.design/${params.path}`)
 
     const headers = new Headers({
       "Content-Type": "application/json",
