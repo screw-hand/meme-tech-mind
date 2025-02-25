@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Icon } from "@iconify/react"
 
+import { IconifyCollections } from "@/types/iconify-collestions"
 import ICON_LIST from "@/config/iconify-skill-icon-list"
 
 const ICONIFY_TYPE_PREFIX = "skill-icons:"
@@ -18,6 +19,8 @@ export function MemeSearchIcon({
 }) {
   const [iconList, setIconList] = useState<string[]>([])
   const [isExpanded, setIsExpanded] = useState(false)
+  const [iconifyCollestions, setIconifyCollestions] =
+    useState<IconifyCollections>([])
 
   const getIconifyIconName = (name: string) => {
     const result = ICON_LIST.filter((x) => x.includes(name)).map(
@@ -44,6 +47,20 @@ export function MemeSearchIcon({
 
     e.target.value = ""
   }
+
+  useEffect(() => {
+    const fetchIconifyCollections = async () => {
+      try {
+        const response = await fetch(`/api/proxy/iconify/collections`)
+        const data = await response.json()
+        setIconifyCollestions(data)
+      } catch (error) {
+        console.error("Failed to fetch icons:", error)
+      }
+    }
+
+    fetchIconifyCollections()
+  }, [])
 
   const handleClearUploadIcon = useCallback(() => {
     iconList.forEach((url) => {
